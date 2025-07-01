@@ -1,6 +1,8 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:semi="https://irihi.tech/semi"
              x:Class="sephp.App"
+			 x:CompileBindings="True"
              xmlns:local="using:sephp"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -10,6 +12,13 @@
     </Application.DataTemplates>
   
     <Application.Styles>
-        <FluentTheme />
+		<semi:SemiTheme Locale="zh-CN" />
     </Application.Styles>
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="Styles/Main.axaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
 </Application>

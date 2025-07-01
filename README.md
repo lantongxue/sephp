@@ -1,1 +1,1 @@
-# sephp
+# sephp is a cross-platform PHP development environment.(一个跨平台的PHP集成开发环境)

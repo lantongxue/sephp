@@ -3,18 +3,109 @@
         xmlns:vm="using:sephp.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		xmlns:lang="using:sephp.I18n"
+        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="500"
+		Width="1200" Height="600"
         x:Class="sephp.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+		x:CompileBindings="True"
         Icon="/Assets/avalonia-logo.ico"
-        Title="sephp">
+		WindowStartupLocation="CenterScreen"
+        Title="{x:Static lang:Resource.AppName}">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<Window.Resources>
+		<ControlTheme x:Key="CategoryTabItem" TargetType="TabItem">
+			<Setter Property="IsEnabled" Value="False" />
+			<Setter Property="Template">
+				<ControlTemplate TargetType="TabItem">
+					<TextBlock
+                        FontWeight="Bold"
+                        FontSize="12"
+                        Margin="4"
+                        Text="{TemplateBinding Header}" />
+				</ControlTemplate>
+			</Setter>
+			<Style Selector="^:disabled /template/ TextBlock">
+				<Setter Property="Foreground" Value="{DynamicResource SemiColorText1}" />
+			</Style>
+		</ControlTheme>
+	</Window.Resources>
+	<Grid RowDefinitions="Auto, *">
+		<Border
+            Grid.Row="0"
+            Margin="8"
+            Padding="12,4"
+            Theme="{DynamicResource CardBorder}">
+			<Panel>
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<SelectableTextBlock
+                        VerticalAlignment="Center"
+                        Classes="H6"
+                        Text="{x:Static lang:Resource.AppName}"
+                        Theme="{DynamicResource TitleSelectableTextBlock}" />
+					<SelectableTextBlock
+                        VerticalAlignment="Center"
+                        Text="/" />
+					<SelectableTextBlock
+                        VerticalAlignment="Center"
+                        Classes="Secondary"
+                        Text="{ReflectionBinding #tab.SelectedItem.Header}" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+					<Button
+                        Theme="{DynamicResource IconBorderlessButton}"
+						Command="{Binding OpenRepoUrl}"
+                        Content="{StaticResource SemiIconGithubLogo}" 
+						ToolTip.Tip="{x:Static lang:Resource.RepoName}"/>
+					<ToggleSwitch
+                        Theme="{DynamicResource IconBorderlessToggleSwitch}"
+						Command="{Binding ToggleTheme}"
+                        OnContent="{StaticResource SemiIconMoon}"
+                        OffContent="{StaticResource SemiIconSun}" 
+						ToolTip.Tip="{x:Static lang:Resource.SwitchDarkOrLightMode}"/>
+				</StackPanel>
+			</Panel>
+		</Border>
+		<TabControl
+            Name="tab"
+            Grid.Row="1"
+            Margin="8"
+            Padding="20,0,0,0"
+            TabStripPlacement="Left"
+            Theme="{DynamicResource ScrollLineTabControl}">
+			<TabControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel />
+				</ItemsPanelTemplate>
+			</TabControl.ItemsPanel>
+			<TabItem Header="概览">
+			</TabItem>
+			<TabItem Header="网站管理">
+			</TabItem>
+			<TabItem
+                Theme="{DynamicResource CategoryTabItem}"
+                Header="核心组件" />
+			<TabItem Header="PHP">
+			</TabItem>
+			<TabItem Header="MySQL">
+			</TabItem>
+			<TabItem Header="Redis">
+			</TabItem>
+			<TabItem Header="Nginx">
+			</TabItem>
+			<TabItem Header="Apache">
+			</TabItem>
+			<TabItem
+                Theme="{DynamicResource CategoryTabItem}"
+                Header="其他" />
+			<TabItem Header="关于">
+			</TabItem>
+		</TabControl>
+	</Grid>
 
 </Window>
