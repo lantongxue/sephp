@@ -1,0 +1,84 @@
+<RadioButton xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 CornerRadius="0"
+             x:Class="sephp.NavigationMenuItem">
+	<RadioButton.Styles>
+		<Style>
+			<Setter Property="HorizontalContentAlignment" Value="Left" />
+			<Setter Property="VerticalContentAlignment" Value="Center" />
+			<Setter Property="Padding" Value="{DynamicResource RadioButtonCardPadding}" />
+			<Setter Property="FontSize" Value="{DynamicResource RadioButtonFontSize}" />
+			<Setter Property="CornerRadius" Value="{DynamicResource RadioButtonCardCornerRadius}" />
+			<Setter Property="Background" Value="{DynamicResource RadioButtonCardDefaultBackground}" />
+			<Setter Property="BorderThickness" Value="3,0,0,0" />
+			<Setter Property="Cursor" Value="Hand" />
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Border
+						Name="RootBorder"
+						Padding="{TemplateBinding Padding}"
+						Background="{TemplateBinding Background}"
+						BorderBrush="{TemplateBinding BorderBrush}"
+						BorderThickness="{TemplateBinding BorderThickness}"
+						CornerRadius="{TemplateBinding CornerRadius}">
+						<Grid
+							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							ColumnDefinitions="Auto,*">
+							<Panel
+								Name="PART_GlyphPanel"
+								Grid.Column="0"
+								VerticalAlignment="Center"
+								HorizontalAlignment="Center"
+								Margin="0">
+								<PathIcon Height="24" Width="24" Foreground="{TemplateBinding IconColor}"
+										  Data="{TemplateBinding Icon}"/>
+							</Panel>
+
+							<ContentPresenter
+								Name="PART_ContentPresenter"
+								Grid.Column="1"
+								Margin="{DynamicResource RadioButtonContentMargin}"
+								HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+								VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+								Content="{TemplateBinding Content}"
+								ContentTemplate="{TemplateBinding ContentTemplate}"
+								Foreground="{TemplateBinding Foreground}"
+								IsVisible="{TemplateBinding Content,Converter={x:Static ObjectConverters.IsNotNull}}"
+								RecognizesAccessKey="True"
+								FontSize="{TemplateBinding FontSize}"
+								TextWrapping="Wrap" />
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter>
+		</Style>
+		<Style Selector=":unchecked">
+			<Style Selector="^:pointerover">
+				<Style Selector="^ /template/ Border#RootBorder">
+					<Setter Property="Background" Value="{DynamicResource RadioButtonCardUncheckPointeroverBackground}" />
+				</Style>
+			</Style>
+			<Style Selector="^:pressed">
+				<Style Selector="^ /template/ Border#RootBorder">
+					<Setter Property="Background" Value="{DynamicResource RadioButtonCardUncheckPressedBackground}" />
+				</Style>
+			</Style>
+		</Style>
+
+		<Style Selector=":checked">
+			<Style Selector="^ /template/ Border#RootBorder">
+				<Setter Property="Background" Value="{DynamicResource RadioButtonCardCheckedBackground}" />
+				<Setter Property="BorderBrush" Value="{DynamicResource RadioButtonCardCheckDefaultBorderBrush}" />
+			</Style>
+			<Style Selector="^:pointerover">
+				<Style Selector="^ /template/ PathIcon#OuterEllipse">
+					<Setter Property="Foreground" Value="{DynamicResource RadioButtonCheckIconPointeroverBackground}" />
+				</Style>
+			</Style>
+		</Style>
+	</RadioButton.Styles>
+</RadioButton>

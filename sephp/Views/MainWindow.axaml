@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:lang="using:sephp.I18n"
+		xmlns:controls="using:sephp"
         mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="500"
 		Width="1200" Height="600"
         x:Class="sephp.Views.MainWindow"
@@ -43,6 +44,10 @@
             Theme="{DynamicResource CardBorder}">
 			<Panel>
 				<StackPanel Orientation="Horizontal" Spacing="8">
+					<ToggleSwitch IsChecked="{Binding #menu.IsPaneOpen}"
+                        Theme="{DynamicResource IconBorderlessToggleSwitch}"
+                        OnContent="{StaticResource SemiIconApps}"
+                        OffContent="{StaticResource SemiIconAppCenter}"/>
 					<SelectableTextBlock
                         VerticalAlignment="Center"
                         Classes="H6"
@@ -53,8 +58,7 @@
                         Text="/" />
 					<SelectableTextBlock
                         VerticalAlignment="Center"
-                        Classes="Secondary"
-                        Text="{ReflectionBinding #tab.SelectedItem.Header}" />
+                        Classes="Secondary" />
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 					<Button
@@ -71,41 +75,35 @@
 				</StackPanel>
 			</Panel>
 		</Border>
-		<TabControl
-            Name="tab"
-            Grid.Row="1"
-            Margin="8"
-            Padding="20,0,0,0"
-            TabStripPlacement="Left"
-            Theme="{DynamicResource ScrollLineTabControl}">
-			<TabControl.ItemsPanel>
-				<ItemsPanelTemplate>
-					<StackPanel />
-				</ItemsPanelTemplate>
-			</TabControl.ItemsPanel>
-			<TabItem Header="概览">
-			</TabItem>
-			<TabItem Header="网站管理">
-			</TabItem>
-			<TabItem
-                Theme="{DynamicResource CategoryTabItem}"
-                Header="核心组件" />
-			<TabItem Header="PHP">
-			</TabItem>
-			<TabItem Header="MySQL">
-			</TabItem>
-			<TabItem Header="Redis">
-			</TabItem>
-			<TabItem Header="Nginx">
-			</TabItem>
-			<TabItem Header="Apache">
-			</TabItem>
-			<TabItem
-                Theme="{DynamicResource CategoryTabItem}"
-                Header="其他" />
-			<TabItem Header="关于">
-			</TabItem>
-		</TabControl>
+		<SplitView 
+			Grid.Row="1"
+			IsPaneOpen="True"
+			DisplayMode="CompactInline"
+			CompactPaneLength="58"
+			Name="menu"
+			OpenPaneLength="200">
+			<SplitView.Pane>
+				<ScrollViewer>
+					<StackPanel>
+						<controls:NavigationMenuItem Content="{x:Static lang:Resource.Overview}" Icon="{StaticResource Overview}" />
+						<controls:NavigationMenuItem Content="{x:Static lang:Resource.WebsiteManage}" Icon="{StaticResource Website}" />
+						<controls:NavigationMenuItem Content="PHP" Icon="{StaticResource PHP}" />
+						<controls:NavigationMenuItem Content="MySQL" Icon="{StaticResource MySQL}" />
+						<controls:NavigationMenuItem Content="Redis" Icon="{StaticResource Redis}" />
+						<controls:NavigationMenuItem Content="Nginx" Icon="{StaticResource Nginx}" />
+						<controls:NavigationMenuItem Content="Apache" Icon="{StaticResource Apache}" />
+						<controls:NavigationMenuItem Content="{x:Static lang:Resource.About}" Icon="{StaticResource About}" />
+					</StackPanel>
+				</ScrollViewer>
+			</SplitView.Pane>
+
+			<Grid>
+				<TextBlock Text="Content"
+						   FontSize="24"
+						   VerticalAlignment="Center"
+						   HorizontalAlignment="Center"/>
+			</Grid>
+		</SplitView>
 	</Grid>
 
 </Window>

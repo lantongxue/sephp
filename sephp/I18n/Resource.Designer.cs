@@ -61,11 +61,29 @@ namespace sephp.I18n {
         }
         
         /// <summary>
+        ///   查找类似 About 的本地化字符串。
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 SEPHP 的本地化字符串。
         /// </summary>
         public static string AppName {
             get {
                 return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Overvie 的本地化字符串。
+        /// </summary>
+        public static string Overview {
+            get {
+                return ResourceManager.GetString("Overview", resourceCulture);
             }
         }
         
@@ -84,6 +102,15 @@ namespace sephp.I18n {
         public static string SwitchDarkOrLightMode {
             get {
                 return ResourceManager.GetString("SwitchDarkOrLightMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 WebsiteManage 的本地化字符串。
+        /// </summary>
+        public static string WebsiteManage {
+            get {
+                return ResourceManager.GetString("WebsiteManage", resourceCulture);
             }
         }
     }
