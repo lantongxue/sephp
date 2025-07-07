@@ -120,11 +120,26 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="Apache" xml:space="preserve">
+    <value>Apache</value>
+  </data>
   <data name="AppName" xml:space="preserve">
     <value>SEPHP</value>
   </data>
+  <data name="MySQL" xml:space="preserve">
+    <value>MySQL</value>
+  </data>
+  <data name="Nginx" xml:space="preserve">
+    <value>Nginx</value>
+  </data>
   <data name="Overview" xml:space="preserve">
     <value>Overvie</value>
+  </data>
+  <data name="PHP" xml:space="preserve">
+    <value>PHP</value>
+  </data>
+  <data name="Redis" xml:space="preserve">
+    <value>Redis</value>
   </data>
   <data name="RepoName" xml:space="preserve">
     <value>GitHub</value>
@@ -132,7 +147,7 @@
   <data name="SwitchDarkOrLightMode" xml:space="preserve">
     <value>Switch Dark/Light mode</value>
   </data>
-  <data name="WebsiteManage" xml:space="preserve">
-    <value>WebsiteManage</value>
+  <data name="Website" xml:space="preserve">
+    <value>Website</value>
   </data>
 </root>

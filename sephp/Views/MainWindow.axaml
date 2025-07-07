@@ -3,8 +3,11 @@
         xmlns:vm="using:sephp.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:rxui="http://reactiveui.net"
 		xmlns:lang="using:sephp.I18n"
-		xmlns:controls="using:sephp"
+		xmlns:controls="using:sephp.Controls"
+		xmlns:views="using:sephp.Views"
+		xmlns:sephp="using:sephp"
         mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="500"
 		Width="1200" Height="600"
         x:Class="sephp.Views.MainWindow"
@@ -58,6 +61,7 @@
                         Text="/" />
 					<SelectableTextBlock
                         VerticalAlignment="Center"
+						Text="{Binding CurrentPageTitle}"
                         Classes="Secondary" />
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -85,23 +89,69 @@
 			<SplitView.Pane>
 				<ScrollViewer>
 					<StackPanel>
-						<controls:NavigationMenuItem Content="{x:Static lang:Resource.Overview}" Icon="{StaticResource Overview}" />
-						<controls:NavigationMenuItem Content="{x:Static lang:Resource.WebsiteManage}" Icon="{StaticResource Website}" />
-						<controls:NavigationMenuItem Content="PHP" Icon="{StaticResource PHP}" />
-						<controls:NavigationMenuItem Content="MySQL" Icon="{StaticResource MySQL}" />
-						<controls:NavigationMenuItem Content="Redis" Icon="{StaticResource Redis}" />
-						<controls:NavigationMenuItem Content="Nginx" Icon="{StaticResource Nginx}" />
-						<controls:NavigationMenuItem Content="Apache" Icon="{StaticResource Apache}" />
-						<controls:NavigationMenuItem Content="{x:Static lang:Resource.About}" Icon="{StaticResource About}" />
+						<controls:NavigationMenuItem
+							Command="{Binding GoView}"
+							CommandParameter="Overview"
+							Content="{x:Static lang:Resource.Overview}"
+							IsChecked="True"
+							Icon="{StaticResource Overview}"
+							IconColor="{DynamicResource SemiColorText0}" />
+						<controls:NavigationMenuItem 
+							Command="{Binding GoView}" 
+							CommandParameter="Website" 
+							Content="{x:Static lang:Resource.Website}" 
+							Icon="{StaticResource Website}" 
+							IconColor="{DynamicResource SemiColorText0}" />
+						<controls:NavigationMenuItem 
+							Command="{Binding GoView}" 
+							CommandParameter="PHP" 
+							Content="{x:Static lang:Resource.PHP}" 
+							Icon="{StaticResource PHP}" 
+							IconColor="{DynamicResource SemiColorText0}" />
+						<controls:NavigationMenuItem 
+							Command="{Binding GoView}" 
+							CommandParameter="MySQL" 
+							Content="{x:Static lang:Resource.MySQL}" 
+							Icon="{StaticResource MySQL}" 
+							IconColor="{DynamicResource SemiColorText0}" />
+						<controls:NavigationMenuItem 
+							Command="{Binding GoView}" 
+							CommandParameter="Redis" 
+							Content="{x:Static lang:Resource.Redis}" 
+							Icon="{StaticResource Redis}" 
+							IconColor="{DynamicResource SemiColorText0}" />
+						<controls:NavigationMenuItem 
+							Command="{Binding GoView}" 
+							CommandParameter="Nginx" 
+							Content="{x:Static lang:Resource.Nginx}" 
+							Icon="{StaticResource Nginx}" 
+							IconColor="{DynamicResource SemiColorText0}" />
+						<controls:NavigationMenuItem 
+							Command="{Binding GoView}" 
+							CommandParameter="Apache" 
+							Content="{x:Static lang:Resource.Apache}" 
+							Icon="{StaticResource Apache}" 
+							IconColor="{DynamicResource SemiColorText0}" />
+						<controls:NavigationMenuItem 
+							Command="{Binding GoView}" 
+							CommandParameter="About" 
+							Content="{x:Static lang:Resource.About}" 
+							Icon="{StaticResource About}" 
+							IconColor="{DynamicResource SemiColorText0}" />
 					</StackPanel>
 				</ScrollViewer>
 			</SplitView.Pane>
 
 			<Grid>
-				<TextBlock Text="Content"
-						   FontSize="24"
-						   VerticalAlignment="Center"
-						   HorizontalAlignment="Center"/>
+				<rxui:RoutedViewHost Grid.Row="0" Router="{Binding Router}">
+					<rxui:RoutedViewHost.DefaultContent>
+						<views:OverviewView />
+					</rxui:RoutedViewHost.DefaultContent>
+					<rxui:RoutedViewHost.ViewLocator>
+						<!-- See AppViewLocator.cs section below -->
+						<sephp:ViewLocator />
+					</rxui:RoutedViewHost.ViewLocator>
+				</rxui:RoutedViewHost>
 			</Grid>
 		</SplitView>
 	</Grid>

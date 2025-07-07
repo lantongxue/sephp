@@ -1,11 +1,12 @@
-using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
+using ReactiveUI;
 using sephp.ViewModels;
+using System;
 
 namespace sephp
 {
-    public class ViewLocator : IDataTemplate
+    public class ViewLocator : IDataTemplate, IViewLocator
     {
 
         public Control? Build(object? param)
@@ -27,6 +28,27 @@ namespace sephp
         public bool Match(object? data)
         {
             return data is ViewModelBase;
+        }
+
+        public IViewFor? ResolveView<T>(T? viewModel, string? contract = null)
+        {
+            if (viewModel is null)
+            {
+                return null;
+            }
+
+            var viewName = viewModel.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
+            var viewType = Type.GetType(viewName);
+            if (viewType != null)
+            {
+                var view = Activator.CreateInstance(viewType) as UserControl;
+                if (view != null)
+                {
+                    view.DataContext = viewModel;
+                    return (IViewFor)view;
+                }
+            }
+            throw new ArgumentOutOfRangeException(nameof(viewModel));
         }
     }
 }

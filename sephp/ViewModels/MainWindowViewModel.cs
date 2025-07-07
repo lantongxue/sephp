@@ -2,17 +2,73 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Styling;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using Semi.Avalonia;
+using sephp.I18n;
 using System;
+using System.Reactive;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 
 namespace sephp.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase, IScreen
     {
-        public string Greeting { get; } = "Welcome to Avalonia!";
-
+        public RoutingState Router { get; } = new RoutingState();
+        
         public string RepoUrl { get; } = "https://github.com/lantongxue/sephp";
+
+        public ReactiveCommand<string, IRoutableViewModel> GoView { get; }
+
+        [Reactive]
+        public string CurrentPageTitle { get; set; } = Resource.Overview;
+        public MainWindowViewModel()
+        {
+            Router.CurrentViewModel.Subscribe(x =>
+            {
+                if(x != null)
+                {
+                    CurrentPageTitle = x.UrlPathSegment ?? "Page Error";
+                }
+            });
+
+            GoView = ReactiveCommand.CreateFromObservable<string, IRoutableViewModel>(GoViewExecute);
+        }
+
+        private IObservable<IRoutableViewModel> GoViewExecute(string param)
+        {
+            IRoutableViewModel viewModel = new OverviewViewModel(this);
+            switch(param)
+            {
+                case "Overview":
+                    viewModel = new OverviewViewModel(this);
+                    break;
+                case "Website":
+                    viewModel = new WebsiteViewModel(this);
+                    break;
+                case "PHP":
+                    viewModel = new PhpViewModel(this);
+                    break;
+                case "MySQL":
+                    viewModel = new MysqlViewModel(this);
+                    break;
+                case "Redis":
+                    viewModel = new RedisViewModel(this);
+                    break;
+                case "Nginx":
+                    viewModel = new NginxViewModel(this);
+                    break;
+                case "Apache":
+                    viewModel = new ApacheViewModel(this);
+                    break;
+                case "About":
+                    viewModel = new AboutViewModel(this);
+                    break;
+            }
+            return Router.Navigate.Execute(viewModel);
+        }
+
         public void ToggleTheme()
         {
             var app = Application.Current;
@@ -40,5 +96,7 @@ namespace sephp.ViewModels
                 _ => null
             };
         }
+
+
     }
 }

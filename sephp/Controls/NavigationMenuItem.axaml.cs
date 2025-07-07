@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 
-namespace sephp;
+namespace sephp.Controls;
 
 public partial class NavigationMenuItem : RadioButton
 {

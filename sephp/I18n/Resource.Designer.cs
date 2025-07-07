@@ -70,6 +70,15 @@ namespace sephp.I18n {
         }
         
         /// <summary>
+        ///   查找类似 Apache 的本地化字符串。
+        /// </summary>
+        public static string Apache {
+            get {
+                return ResourceManager.GetString("Apache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 SEPHP 的本地化字符串。
         /// </summary>
         public static string AppName {
@@ -79,11 +88,47 @@ namespace sephp.I18n {
         }
         
         /// <summary>
+        ///   查找类似 MySQL 的本地化字符串。
+        /// </summary>
+        public static string MySQL {
+            get {
+                return ResourceManager.GetString("MySQL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Nginx 的本地化字符串。
+        /// </summary>
+        public static string Nginx {
+            get {
+                return ResourceManager.GetString("Nginx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Overvie 的本地化字符串。
         /// </summary>
         public static string Overview {
             get {
                 return ResourceManager.GetString("Overview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 PHP 的本地化字符串。
+        /// </summary>
+        public static string PHP {
+            get {
+                return ResourceManager.GetString("PHP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Redis 的本地化字符串。
+        /// </summary>
+        public static string Redis {
+            get {
+                return ResourceManager.GetString("Redis", resourceCulture);
             }
         }
         
@@ -106,11 +151,11 @@ namespace sephp.I18n {
         }
         
         /// <summary>
-        ///   查找类似 WebsiteManage 的本地化字符串。
+        ///   查找类似 Website 的本地化字符串。
         /// </summary>
-        public static string WebsiteManage {
+        public static string Website {
             get {
-                return ResourceManager.GetString("WebsiteManage", resourceCulture);
+                return ResourceManager.GetString("Website", resourceCulture);
             }
         }
     }
