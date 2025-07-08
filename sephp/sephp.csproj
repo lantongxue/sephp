@@ -35,6 +35,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\SettingView.axaml.cs">
+      <DependentUpon>SettingView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\AboutView.axaml.cs">
       <DependentUpon>AboutView.axaml</DependentUpon>
     </Compile>

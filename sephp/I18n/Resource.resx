@@ -144,6 +144,9 @@
   <data name="RepoName" xml:space="preserve">
     <value>GitHub</value>
   </data>
+  <data name="Setting" xml:space="preserve">
+    <value>Setting</value>
+  </data>
   <data name="SwitchDarkOrLightMode" xml:space="preserve">
     <value>Switch Dark/Light mode</value>
   </data>

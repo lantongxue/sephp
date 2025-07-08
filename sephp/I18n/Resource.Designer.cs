@@ -142,6 +142,15 @@ namespace sephp.I18n {
         }
         
         /// <summary>
+        ///   查找类似 Setting 的本地化字符串。
+        /// </summary>
+        public static string Setting {
+            get {
+                return ResourceManager.GetString("Setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Switch Dark/Light mode 的本地化字符串。
         /// </summary>
         public static string SwitchDarkOrLightMode {

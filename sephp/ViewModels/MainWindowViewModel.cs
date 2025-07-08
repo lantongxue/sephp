@@ -62,6 +62,9 @@ namespace sephp.ViewModels
                 case "Apache":
                     viewModel = new ApacheViewModel(this);
                     break;
+                case "Setting":
+                    viewModel = new SettingViewModel(this);
+                    break;
                 case "About":
                     viewModel = new AboutViewModel(this);
                     break;

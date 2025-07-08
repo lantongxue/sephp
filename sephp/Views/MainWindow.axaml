@@ -51,15 +51,15 @@
                         Theme="{DynamicResource IconBorderlessToggleSwitch}"
                         OnContent="{StaticResource SemiIconApps}"
                         OffContent="{StaticResource SemiIconAppCenter}"/>
-					<SelectableTextBlock
+					<TextBlock
                         VerticalAlignment="Center"
                         Classes="H6"
                         Text="{x:Static lang:Resource.AppName}"
-                        Theme="{DynamicResource TitleSelectableTextBlock}" />
-					<SelectableTextBlock
+                        Theme="{DynamicResource TitleTextBlock}" />
+					<TextBlock
                         VerticalAlignment="Center"
                         Text="/" />
-					<SelectableTextBlock
+					<TextBlock
                         VerticalAlignment="Center"
 						Text="{Binding CurrentPageTitle}"
                         Classes="Secondary" />
@@ -132,6 +132,12 @@
 							Content="{x:Static lang:Resource.Apache}" 
 							Icon="{StaticResource Apache}" 
 							IconColor="{DynamicResource SemiColorText0}" />
+						<controls:NavigationMenuItem
+							Command="{Binding GoView}"
+							CommandParameter="Setting"
+							Content="{x:Static lang:Resource.Setting}"
+							Icon="{StaticResource SemiIconSettingStroked}"
+							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem 
 							Command="{Binding GoView}" 
 							CommandParameter="About" 
@@ -148,7 +154,6 @@
 						<views:OverviewView />
 					</rxui:RoutedViewHost.DefaultContent>
 					<rxui:RoutedViewHost.ViewLocator>
-						<!-- See AppViewLocator.cs section below -->
 						<sephp:ViewLocator />
 					</rxui:RoutedViewHost.ViewLocator>
 				</rxui:RoutedViewHost>
