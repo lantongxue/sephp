@@ -1,0 +1,21 @@
+[
+  {
+    "name": "php-7.4.33",
+    "version": "7.4.33",
+    "ts": "nts/ts",
+    "package": {
+      "php": {
+        "url": "xxxx",
+        "sha256": "xxxx"
+      },
+      "extensions": [
+        {
+          "name": "opcache",
+          "version": "0.0.2",
+          "url": "xxxx",
+          "sha256": "xxxx"
+        }
+      ]
+    }
+  }
+]

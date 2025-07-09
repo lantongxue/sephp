@@ -49,8 +49,7 @@
 								Foreground="{TemplateBinding Foreground}"
 								IsVisible="{TemplateBinding Content,Converter={x:Static ObjectConverters.IsNotNull}}"
 								RecognizesAccessKey="True"
-								FontSize="{TemplateBinding FontSize}"
-								TextWrapping="Wrap" />
+								FontSize="{TemplateBinding FontSize}" />
 						</Grid>
 					</Border>
 				</ControlTemplate>
