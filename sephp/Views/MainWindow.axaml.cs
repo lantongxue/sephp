@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Rendering;
 
 namespace sephp.Views
 {
@@ -7,6 +8,14 @@ namespace sephp.Views
         public MainWindow()
         {
             InitializeComponent();
+
+#if DEBUG
+            this.RendererDiagnostics.DebugOverlays =
+                RendererDebugOverlays.Fps |
+                RendererDebugOverlays.LayoutTimeGraph |
+                RendererDebugOverlays.RenderTimeGraph ;
+#endif
+
         }
     }
 }
