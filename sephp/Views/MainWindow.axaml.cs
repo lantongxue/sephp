@@ -8,14 +8,21 @@ namespace sephp.Views
         public MainWindow()
         {
             InitializeComponent();
+        }
 
-#if DEBUG
-            this.RendererDiagnostics.DebugOverlays =
+        private void ToggleSwitch_Checked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var switchBtn = e.Source as ToggleSwitch;
+            if(switchBtn!.IsChecked!.Value)
+            {
+                this.RendererDiagnostics.DebugOverlays =
                 RendererDebugOverlays.Fps |
                 RendererDebugOverlays.LayoutTimeGraph |
-                RendererDebugOverlays.RenderTimeGraph ;
-#endif
-
+                RendererDebugOverlays.RenderTimeGraph;
+            } else
+            {
+                this.RendererDiagnostics.DebugOverlays = RendererDebugOverlays.None;
+            }
         }
     }
 }

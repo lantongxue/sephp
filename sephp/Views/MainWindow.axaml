@@ -144,6 +144,7 @@
 							Content="{x:Static lang:Resource.About}" 
 							Icon="{StaticResource About}" 
 							IconColor="{DynamicResource SemiColorText0}" />
+						<ToggleSwitch IsCheckedChanged="ToggleSwitch_Checked" Content="调试模式"/>
 					</StackPanel>
 				</ScrollViewer>
 			</SplitView.Pane>
