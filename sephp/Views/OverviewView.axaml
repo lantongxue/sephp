@@ -2,7 +2,101 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="sephp.Views.OverviewView">
-	Overview Page
+			 xmlns:lvcCore="using:LiveChartsCore.SkiaSharpView"
+			 xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+			 xmlns:vm="using:sephp.ViewModels"
+			 x:DataType="vm:OverviewViewModel"
+             x:Class="sephp.Views.OverviewView"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Margin="10">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="150" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Border Grid.Column="0" Classes="Hover" Theme="{StaticResource CardBorder}" Padding="2">
+			<lvc:CartesianChart>
+				<lvc:CartesianChart.XAxes>
+					<lvcCore:Axis LabelsPaint="{x:Null}" SeparatorsPaint="{lvc:SolidColorPaint Color='#64b4b4b4'}" />
+				</lvc:CartesianChart.XAxes>
+				<lvc:CartesianChart.YAxes>
+					<lvcCore:Axis LabelsPaint="{x:Null}" SeparatorsPaint="{lvc:SolidColorPaint Color='#64b4b4b4'}" />
+				</lvc:CartesianChart.YAxes>
+				<lvc:CartesianChart.Title>
+					<lvc:XamlDrawnLabelVisual
+						Text="CPU"
+						Paint="{lvc:SolidColorPaint Color='#303030'}"
+						TextSize="15" />
+				</lvc:CartesianChart.Title>
+				<lvc:CartesianChart.Series>
+					<lvc:XamlLineSeries 
+						SeriesName="Usage"
+						GeometrySize="0"
+						LineSmoothness="0"
+						Values="{Binding CpuTimes}"/>
+				</lvc:CartesianChart.Series>
+			</lvc:CartesianChart>
+		</Border>
+		<Border Grid.Column="1" Classes="Hover" Theme="{StaticResource CardBorder}" Padding="2">
+			<lvc:CartesianChart>
+				<lvc:CartesianChart.XAxes>
+					<lvcCore:Axis LabelsPaint="{x:Null}" SeparatorsPaint="{lvc:SolidColorPaint Color='#64b4b4b4'}" />
+				</lvc:CartesianChart.XAxes>
+				<lvc:CartesianChart.YAxes>
+					<lvcCore:Axis LabelsPaint="{x:Null}" SeparatorsPaint="{lvc:SolidColorPaint Color='#64b4b4b4'}" />
+				</lvc:CartesianChart.YAxes>
+				<lvc:CartesianChart.Title>
+					<lvc:XamlDrawnLabelVisual
+						Text="RAM"
+						Paint="{lvc:SolidColorPaint Color='#303030'}"
+						TextSize="15" />
+				</lvc:CartesianChart.Title>
+				<lvc:CartesianChart.Series>
+					<lvc:XamlLineSeries
+						SeriesName="Total"
+						GeometrySize="0"
+						LineSmoothness="0"
+						Values="{Binding MemoryTotal}"/>
+				</lvc:CartesianChart.Series>
+				<lvc:CartesianChart.Series>
+					<lvc:XamlLineSeries
+						SeriesName="Usage"
+						GeometrySize="0"
+						LineSmoothness="0"
+						Values="{Binding MemoryUsgae}"/>
+				</lvc:CartesianChart.Series>
+			</lvc:CartesianChart>
+		</Border>
+		<Border Grid.Column="2" Classes="Hover" Theme="{StaticResource CardBorder}" Padding="2">
+			<lvc:CartesianChart>
+				<lvc:CartesianChart.XAxes>
+					<lvcCore:Axis LabelsPaint="{x:Null}" SeparatorsPaint="{lvc:SolidColorPaint Color='#64b4b4b4'}" />
+				</lvc:CartesianChart.XAxes>
+				<lvc:CartesianChart.YAxes>
+					<lvcCore:Axis LabelsPaint="{x:Null}" SeparatorsPaint="{lvc:SolidColorPaint Color='#64b4b4b4'}" />
+				</lvc:CartesianChart.YAxes>
+				<lvc:CartesianChart.Title>
+					<lvc:XamlDrawnLabelVisual
+						Text="Network"
+						Paint="{lvc:SolidColorPaint Color='#303030'}"
+						TextSize="15" />
+				</lvc:CartesianChart.Title>
+				<lvc:CartesianChart.Series>
+					<lvc:XamlLineSeries
+						SeriesName="Download"
+						GeometrySize="0"
+						LineSmoothness="0"
+						Values="{Binding NetworkDownloads}"/>
+					<lvc:XamlLineSeries
+						SeriesName="Upload"
+						GeometrySize="0"
+						LineSmoothness="0"
+						Values="{Binding NetworkUploads}"/>
+				</lvc:CartesianChart.Series>
+			</lvc:CartesianChart>
+		</Border>
+	</Grid>
 </UserControl>

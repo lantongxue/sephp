@@ -150,9 +150,6 @@
 
 			<Grid>
 				<rxui:RoutedViewHost Grid.Row="0" Router="{Binding Router}">
-					<rxui:RoutedViewHost.DefaultContent>
-						<views:OverviewView />
-					</rxui:RoutedViewHost.DefaultContent>
 					<rxui:RoutedViewHost.ViewLocator>
 						<sephp:ViewLocator />
 					</rxui:RoutedViewHost.ViewLocator>

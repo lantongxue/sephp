@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Styling;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using Semi.Avalonia;
 using sephp.I18n;
 using System;
@@ -34,16 +34,16 @@ namespace sephp.ViewModels
             });
 
             GoView = ReactiveCommand.CreateFromObservable<string, IRoutableViewModel>(GoViewExecute);
+
+            Router.Navigate.Execute(new OverviewViewModel(this));
         }
 
         private IObservable<IRoutableViewModel> GoViewExecute(string param)
         {
-            IRoutableViewModel viewModel = new OverviewViewModel(this);
+            IRoutableViewModel? viewModel = null;
             switch(param)
             {
-                case "Overview":
-                    viewModel = new OverviewViewModel(this);
-                    break;
+                
                 case "Website":
                     viewModel = new WebsiteViewModel(this);
                     break;
@@ -67,6 +67,10 @@ namespace sephp.ViewModels
                     break;
                 case "About":
                     viewModel = new AboutViewModel(this);
+                    break;
+                case "Overview":
+                default:
+                    viewModel = new OverviewViewModel(this);
                     break;
             }
             return Router.Navigate.Execute(viewModel);
