@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace sephp.Monitor
+namespace sephp.Monitor.System
 {
     public class CpuWindows
     {
@@ -33,7 +33,7 @@ namespace sephp.Monitor
             var sysIdle = idle - _prevIdle;
 
             var total = sysKernel + sysUser;
-            var usage = total == 0 ? 0 : (1.0 - ((double)sysIdle / total)) * 100;
+            var usage = total == 0 ? 0 : (1.0 - (double)sysIdle / total) * 100;
 
             _prevIdle = idle;
             _prevKernel = kernel;
@@ -47,9 +47,9 @@ namespace sephp.Monitor
             if (!GetSystemTimes(out var idleTime, out var kernelTime, out var userTime))
                 throw new InvalidOperationException("GetSystemTimes failed.");
 
-            idle = ((ulong)idleTime.dwHighDateTime << 32) | idleTime.dwLowDateTime;
-            kernel = ((ulong)kernelTime.dwHighDateTime << 32) | kernelTime.dwLowDateTime;
-            user = ((ulong)userTime.dwHighDateTime << 32) | userTime.dwLowDateTime;
+            idle = (ulong)idleTime.dwHighDateTime << 32 | idleTime.dwLowDateTime;
+            kernel = (ulong)kernelTime.dwHighDateTime << 32 | kernelTime.dwLowDateTime;
+            user = (ulong)userTime.dwHighDateTime << 32 | userTime.dwLowDateTime;
         }
 
     }

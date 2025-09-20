@@ -1,31 +1,21 @@
-﻿using Avalonia;
-using Avalonia.Threading;
+﻿using LiveChartsCore;
 using LiveChartsCore.Defaults;
+using LiveChartsCore.Kernel;
+using LiveChartsCore.SkiaSharpView;
 using ReactiveUI;
+using ReactiveUI.SourceGenerators;
 using sephp.I18n;
-using sephp.Monitor;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Diagnostics.Tracing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 
 namespace sephp.ViewModels
 {
-    public class OverviewViewModel : ViewModelBase, IRoutableViewModel
+    public partial class OverviewViewModel : ViewModelBase, IRoutableViewModel
     {
         public string? UrlPathSegment { get; } = Resource.Overview;
 
         public IScreen HostScreen { get; }
-
-        public ObservableCollection<ObservableValue> CpuTimes { get; set; } = [];
 
         public ObservableCollection<ObservableValue> NetworkDownloads { get; set; } = [];
 
@@ -35,76 +25,82 @@ namespace sephp.ViewModels
 
         public ObservableCollection<ObservableValue> MemoryUsgae { get; set; } = [];
 
+        public ObservableCollection<ObservableValue> CpuTimes { get; set; } = [];
+        public ISeries[] CpuSeries =>
+        [
+            new LineSeries<ObservableValue>
+            {
+                Values = CpuTimes,
+                GeometrySize = 0,
+                LineSmoothness = 10,
+                Name = "CPU",
+                YToolTipLabelFormatter = point => $"{point.Coordinate.PrimaryValue} %"
+            }
+        ];
+
+        public ISeries[] MemorySeries =>
+        [
+            new LineSeries<ObservableValue>
+            {
+                Values = MemoryTotal,
+                GeometrySize = 0,
+                LineSmoothness = 0,
+                Name = "Total",
+                YToolTipLabelFormatter = point => $"{Math.Round(point.Coordinate.PrimaryValue / 1024)} GB"
+            },
+            new LineSeries<ObservableValue>
+            {
+                Values = MemoryUsgae,
+                GeometrySize = 0,
+                LineSmoothness = 0,
+                Name = "Usage",
+                YToolTipLabelFormatter = point => $"{Math.Round(point.Coordinate.PrimaryValue / 1024)} GB"
+            }
+        ];
+
+        public ISeries[] NetworkSeries =>
+        [
+            new LineSeries<ObservableValue>
+            {
+                Values = NetworkUploads,
+                GeometrySize = 0,
+                LineSmoothness = 10,
+                Name = "Upload",
+                YToolTipLabelFormatter = _networkYTooltipFormatter
+            },
+            new LineSeries<ObservableValue>
+            {
+                Values = NetworkDownloads,
+                GeometrySize = 0,
+                LineSmoothness = 10,
+                Name = "Download",
+                YToolTipLabelFormatter = _networkYTooltipFormatter
+            }
+        ];
+
+        private Func<ChartPoint, string> _networkYTooltipFormatter = point => {
+            if (point.Coordinate.PrimaryValue < 1024)
+            {
+                return $"{point.Coordinate.PrimaryValue} Kb";
+            }
+            else
+            {
+                return $"{Math.Round(point.Coordinate.PrimaryValue / 1024, 2)} Mb";
+            }
+        };
+
         public OverviewViewModel(IScreen screen)
         {
             HostScreen = screen;
 
-            DispatcherTimer timer = new DispatcherTimer()
+            for(int i = 0; i < 10; i++)
             {
-                Interval = TimeSpan.FromSeconds(1)
-            };
-            timer.Tick += Timer_Tick;
-            timer.Start();
-        }
-
-        private Cpu cpu = new Cpu();
-        private Network network = new Network();
-
-        private Memory memory = new Memory();
-
-        private async void Timer_Tick(object? sender, EventArgs e)
-        {
-            if(CpuTimes.Count >= 10)
-            {
-                CpuTimes.RemoveAt(0);
+                CpuTimes.Add(new ObservableValue { Value = 0 });
+                MemoryTotal.Add(new ObservableValue { Value = 0 });
+                MemoryUsgae.Add(new ObservableValue { Value = 0 });
+                NetworkDownloads.Add(new ObservableValue { Value = 0 });
+                NetworkUploads.Add(new ObservableValue { Value = 0 });
             }
-            CpuTimes.Add(new ObservableValue
-            {
-                Value = await cpu.GetCpuUsageAsync()
-            });
-
-            var (download, upload) = network.GetNetworkUsage();
-
-            if (NetworkDownloads.Count >= 10)
-            {
-                NetworkDownloads.RemoveAt(0);
-            }
-            NetworkDownloads.Add(new ObservableValue
-            {
-                Value = download
-            });
-
-            if (NetworkUploads.Count >= 10)
-            {
-                NetworkUploads.RemoveAt(0);
-            }
-            NetworkUploads.Add(new ObservableValue
-            {
-                Value = upload
-            });
-
-            var (usage, total) = await memory.GetMemoryUsageAsync();
-
-            if (MemoryUsgae.Count >= 10)
-            {
-                MemoryUsgae.RemoveAt(0);
-            }
-            MemoryUsgae.Add(new ObservableValue
-            {
-                Value = usage
-            });
-
-            if (MemoryTotal.Count >= 10)
-            {
-                MemoryTotal.RemoveAt(0);
-            }
-            MemoryTotal.Add(new ObservableValue
-            {
-                Value = total
-            });
         }
     }
-
-    
-
 }

@@ -5,7 +5,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sephp.Monitor
+namespace sephp.Monitor.System
 {
     public class Network
     {

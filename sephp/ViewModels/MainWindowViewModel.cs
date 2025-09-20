@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace sephp.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase, IScreen
+    public partial class MainWindowViewModel : ViewModelBase, IScreen
     {
         public RoutingState Router { get; } = new RoutingState();
         
@@ -22,7 +22,7 @@ namespace sephp.ViewModels
         public ReactiveCommand<string, IRoutableViewModel> GoView { get; }
 
         [Reactive]
-        public string CurrentPageTitle { get; set; } = Resource.Overview;
+        private string _currentPageTitle = Resource.Overview;
         public MainWindowViewModel()
         {
             Router.CurrentViewModel.Subscribe(x =>
