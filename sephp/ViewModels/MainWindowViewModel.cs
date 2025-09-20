@@ -1,33 +1,88 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Markup.Xaml.Styling;
+using Avalonia.Media;
 using Avalonia.Styling;
+using DynamicData;
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 using Semi.Avalonia;
 using sephp.I18n;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Resources;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace sephp.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase, IScreen
     {
         public RoutingState Router { get; } = new RoutingState();
-        
+
         public string RepoUrl { get; } = "https://github.com/lantongxue/sephp";
 
         public ReactiveCommand<string, IRoutableViewModel> GoView { get; }
 
         [Reactive]
-        private string _currentPageTitle = Resource.Overview;
+        private string? _currentPageTitle;
+
+        [Reactive]
+        private ThemeVariant? _selectedThemeVariant;
+
+        public IReadOnlyList<MenuItemViewModel> MenuItems { get; }
         public MainWindowViewModel()
         {
+            MenuItems =
+            [
+                new MenuItemViewModel
+                {
+                    Header = "Theme",
+                    Items =
+                    [
+                        new MenuItemViewModel
+                        {
+                            Header = "Auto",
+                            Command = FollowSystemThemeCommand
+                        },
+                        new MenuItemViewModel
+                        {
+                            Header = "Aquatic",
+                            Command = SelectThemeCommand,
+                            CommandParameter = SemiTheme.Aquatic
+                        },
+                        new MenuItemViewModel
+                        {
+                            Header = "Desert",
+                            Command = SelectThemeCommand,
+                            CommandParameter = SemiTheme.Desert
+                        },
+                        new MenuItemViewModel
+                        {
+                            Header = "Dusk",
+                            Command = SelectThemeCommand,
+                            CommandParameter = SemiTheme.Dusk
+                        },
+                        new MenuItemViewModel
+                        {
+                            Header = "NightSky",
+                            Command = SelectThemeCommand,
+                            CommandParameter = SemiTheme.NightSky
+                        }
+                    ]
+                }
+            ];
+
             Router.CurrentViewModel.Subscribe(x =>
             {
-                if(x != null)
+                if (x != null)
                 {
                     CurrentPageTitle = x.UrlPathSegment ?? "Page Error";
                 }
@@ -41,9 +96,9 @@ namespace sephp.ViewModels
         private IObservable<IRoutableViewModel> GoViewExecute(string param)
         {
             IRoutableViewModel? viewModel = null;
-            switch(param)
+            switch (param)
             {
-                
+
                 case "Website":
                     viewModel = new WebsiteViewModel(this);
                     break;
@@ -85,6 +140,21 @@ namespace sephp.ViewModels
             app.UnregisterFollowSystemTheme();
         }
 
+        [ReactiveCommand]
+        private void FollowSystemTheme()
+        {
+            Application.Current?.RegisterFollowSystemTheme();
+        }
+
+        [ReactiveCommand]
+        private void SelectTheme(object? obj)
+        {
+            var app = Application.Current;
+            if (app is null) return;
+            app.RequestedThemeVariant = obj as ThemeVariant;
+            app.UnregisterFollowSystemTheme();
+        }
+
         public async Task OpenRepoUrl()
         {
             var launcher = ResolveDefaultTopLevel()?.Launcher;
@@ -103,7 +173,13 @@ namespace sephp.ViewModels
                 _ => null
             };
         }
+    }
 
-
+    public class MenuItemViewModel
+    {
+        public string? Header { get; set; }
+        public ICommand? Command { get; set; }
+        public object? CommandParameter { get; set; }
+        public IList<MenuItemViewModel>? Items { get; set; }
     }
 }

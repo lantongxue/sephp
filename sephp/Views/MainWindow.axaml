@@ -7,6 +7,7 @@
 		xmlns:lang="using:sephp.I18n"
 		xmlns:controls="using:sephp.Controls"
 		xmlns:views="using:sephp.Views"
+		xmlns:models="using:sephp.ViewModels"
 		xmlns:sephp="using:sephp"
         mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="500"
 		Width="1200" Height="600"
@@ -41,41 +42,56 @@
 	</Window.Resources>
 	<Grid RowDefinitions="Auto, *">
 		<Border
-            Grid.Row="0"
-            Margin="8"
-            Padding="12,4"
-            Theme="{DynamicResource CardBorder}">
+			Grid.Row="0"
+			Margin="8"
+			Padding="12,4"
+			Theme="{DynamicResource CardBorder}">
 			<Panel>
 				<StackPanel Orientation="Horizontal" Spacing="8">
 					<ToggleSwitch IsChecked="{Binding #menu.IsPaneOpen}"
-                        Theme="{DynamicResource IconBorderlessToggleSwitch}"
-                        OnContent="{StaticResource SemiIconApps}"
-                        OffContent="{StaticResource SemiIconAppCenter}"/>
+						Theme="{DynamicResource IconBorderlessToggleSwitch}"
+						OnContent="{StaticResource SemiIconApps}"
+						OffContent="{StaticResource SemiIconAppCenter}"/>
 					<TextBlock
-                        VerticalAlignment="Center"
-                        Classes="H6"
+						VerticalAlignment="Center"
+						Classes="H6"
                         Text="{x:Static lang:Resource.AppName}"
-                        Theme="{DynamicResource TitleTextBlock}" />
+						Theme="{DynamicResource TitleTextBlock}" />
 					<TextBlock
-                        VerticalAlignment="Center"
-                        Text="/" />
+						VerticalAlignment="Center"
+						Text="/" />
 					<TextBlock
-                        VerticalAlignment="Center"
+						VerticalAlignment="Center"
 						Text="{Binding CurrentPageTitle}"
-                        Classes="Secondary" />
+						Classes="Secondary" />
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 					<Button
-                        Theme="{DynamicResource IconBorderlessButton}"
+						Theme="{DynamicResource IconBorderlessButton}"
 						Command="{Binding OpenRepoUrl}"
-                        Content="{StaticResource SemiIconGithubLogo}" 
+						Content="{StaticResource SemiIconGithubLogo}" 
 						ToolTip.Tip="{x:Static lang:Resource.RepoName}"/>
 					<ToggleSwitch
-                        Theme="{DynamicResource IconBorderlessToggleSwitch}"
+						Theme="{DynamicResource IconBorderlessToggleSwitch}"
 						Command="{Binding ToggleTheme}"
-                        OnContent="{StaticResource SemiIconMoon}"
-                        OffContent="{StaticResource SemiIconSun}" 
+						OnContent="{StaticResource SemiIconMoon}"
+						OffContent="{StaticResource SemiIconSun}" 
 						ToolTip.Tip="{x:Static lang:Resource.SwitchDarkOrLightMode}"/>
+					<Button
+						Theme="{DynamicResource IconBorderlessButton}"
+						Content="{StaticResource SemiIconMenu}">
+							<Button.Flyout>
+								<MenuFlyout Placement="Bottom" ItemsSource="{Binding MenuItems}" />
+							</Button.Flyout>
+							<Button.Styles>
+								<Style Selector="MenuItem" x:DataType="models:MenuItemViewModel">
+									<Setter Property="Header" Value="{Binding Header}" />
+									<Setter Property="ItemsSource" Value="{Binding Items}" />
+									<Setter Property="Command" Value="{Binding Command}" />
+									<Setter Property="CommandParameter" Value="{Binding CommandParameter}" />
+								</Style>
+							</Button.Styles>
+					</Button>
 				</StackPanel>
 			</Panel>
 		</Border>
@@ -94,43 +110,43 @@
 							CommandParameter="Overview"
 							Content="{x:Static lang:Resource.Overview}"
 							IsChecked="True"
-							Icon="{StaticResource Overview}"
+							Icon="{StaticResource IconOverview}"
 							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem 
 							Command="{Binding GoView}" 
 							CommandParameter="Website" 
 							Content="{x:Static lang:Resource.Website}" 
-							Icon="{StaticResource Website}" 
+							Icon="{StaticResource IconWebsite}" 
 							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem 
 							Command="{Binding GoView}" 
 							CommandParameter="PHP" 
 							Content="{x:Static lang:Resource.PHP}" 
-							Icon="{StaticResource PHP}" 
+							Icon="{StaticResource IconPHP}" 
 							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem 
 							Command="{Binding GoView}" 
 							CommandParameter="MySQL" 
 							Content="{x:Static lang:Resource.MySQL}" 
-							Icon="{StaticResource MySQL}" 
+							Icon="{StaticResource IconMySQL}" 
 							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem 
 							Command="{Binding GoView}" 
 							CommandParameter="Redis" 
 							Content="{x:Static lang:Resource.Redis}" 
-							Icon="{StaticResource Redis}" 
+							Icon="{StaticResource IconRedis}" 
 							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem 
 							Command="{Binding GoView}" 
 							CommandParameter="Nginx" 
 							Content="{x:Static lang:Resource.Nginx}" 
-							Icon="{StaticResource Nginx}" 
+							Icon="{StaticResource IconNginx}" 
 							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem 
 							Command="{Binding GoView}" 
 							CommandParameter="Apache" 
 							Content="{x:Static lang:Resource.Apache}" 
-							Icon="{StaticResource Apache}" 
+							Icon="{StaticResource IconApache}" 
 							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem
 							Command="{Binding GoView}"
@@ -142,9 +158,9 @@
 							Command="{Binding GoView}" 
 							CommandParameter="About" 
 							Content="{x:Static lang:Resource.About}" 
-							Icon="{StaticResource About}" 
+							Icon="{StaticResource IconAbout}" 
 							IconColor="{DynamicResource SemiColorText0}" />
-						<ToggleSwitch IsCheckedChanged="ToggleSwitch_Checked" Content="调试模式"/>
+						<ToggleSwitch Theme="{StaticResource SimpleToggleSwitch}" IsCheckedChanged="ToggleSwitch_Checked" Content="{x:Static lang:Resource.DebugMode}"/>
 					</StackPanel>
 				</ScrollViewer>
 			</SplitView.Pane>
@@ -158,5 +174,4 @@
 			</Grid>
 		</SplitView>
 	</Grid>
-
 </Window>

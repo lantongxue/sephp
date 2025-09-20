@@ -14,8 +14,8 @@ namespace sephp.Monitor.System
             var freeLine = lines.FirstOrDefault(l => l.StartsWith("MemAvailable"));
             var totalKb = double.Parse(totalLine.Split(':')[1].Trim().Split(' ')[0]);
             var freeKb = double.Parse(freeLine.Split(':')[1].Trim().Split(' ')[0]);
-            var usedMb = (totalKb - freeKb) / 1024 / 1024;
-            var totalMb = totalKb / 1024 / 1024;
+            var usedMb = (totalKb - freeKb) / 1024;
+            var totalMb = totalKb / 1024;
             return (Math.Round(usedMb), Math.Round(totalMb));
         }
     }

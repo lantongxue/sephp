@@ -1,4 +1,6 @@
-﻿using LiveChartsCore;
+﻿using Avalonia;
+using Avalonia.Controls;
+using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.Kernel;
 using LiveChartsCore.SkiaSharpView;
@@ -33,7 +35,7 @@ namespace sephp.ViewModels
                 Values = CpuTimes,
                 GeometrySize = 0,
                 LineSmoothness = 10,
-                Name = "CPU",
+                Name = "Usage",
                 YToolTipLabelFormatter = point => $"{point.Coordinate.PrimaryValue} %"
             }
         ];
