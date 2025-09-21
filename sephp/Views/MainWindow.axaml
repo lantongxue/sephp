@@ -10,12 +10,12 @@
 		xmlns:models="using:sephp.ViewModels"
 		xmlns:sephp="using:sephp"
         mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="500"
-		Width="1200" Height="600"
         x:Class="sephp.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
 		x:CompileBindings="True"
         Icon="/Assets/avalonia-logo.ico"
 		WindowStartupLocation="CenterScreen"
+		Resized="Window_Resized"
         Title="{x:Static lang:Resource.AppName}">
 
     <Design.DataContext>

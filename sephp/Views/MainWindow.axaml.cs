@@ -13,7 +13,7 @@ namespace sephp.Views
 {
     public partial class MainWindow : Window
     {
-        
+        IConfigService<AppSettings> config = Locator.Current.GetService<IConfigService<AppSettings>>()!;
         public MainWindow()
         {
             InitializeComponent();
@@ -22,8 +22,8 @@ namespace sephp.Views
             {
                 if (state == WindowState.Normal)
                 {
-                    Width = 1200;
-                    Height = 600;
+                    Width = config.Settings.Width;
+                    Height = config.Settings.Height;
                 }
             });
 
@@ -32,7 +32,7 @@ namespace sephp.Views
                 ShowDebugOverlays(msg.Show);
             });
 
-            IConfigService<AppSettings> config = Locator.Current.GetService<IConfigService<AppSettings>>()!;
+            
             ShowDebugOverlays(config.Settings.DebugOverlay);
         }
 
@@ -49,6 +49,13 @@ namespace sephp.Views
             {
                 this.RendererDiagnostics.DebugOverlays = RendererDebugOverlays.None;
             }
+        }
+
+        private void Window_Resized(object? sender, Avalonia.Controls.WindowResizedEventArgs e)
+        {
+            config.Settings.Width = Width;
+            config.Settings.Height = Height;
+            config.Save();
         }
     }
 }
