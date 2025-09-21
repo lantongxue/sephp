@@ -19,9 +19,9 @@ namespace sephp.Views;
 
 public partial class OverviewView : ReactiveUserControl<OverviewViewModel>
 {
-    private Cpu cpu = new Cpu();
-    private Memory memory = new Memory();
-    private Network network = new Network();
+    private CpuMonitor cpu = new CpuMonitor();
+    private MemoryMonitor memory = new MemoryMonitor();
+    private NetworkMonitor network = new NetworkMonitor();
     public OverviewView()
     {
         InitializeComponent();

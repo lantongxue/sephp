@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace sephp.Monitor.System
 {
-    public class Network
+    public class NetworkMonitor
     {
         private long _lastBytesSent;
         private long _lastBytesReceived;
         private DateTime _lastCheckTime;
 
-        public Network()
+        public NetworkMonitor()
         {
             _lastCheckTime = DateTime.UtcNow;
             (_lastBytesSent, _lastBytesReceived) = GetCurrentBytes();

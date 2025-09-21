@@ -1,5 +1,10 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Rendering;
+using ReactiveUI;
+using sephp.MessageBusRequests;
+using System;
+
 
 namespace sephp.Views
 {
@@ -8,21 +13,30 @@ namespace sephp.Views
         public MainWindow()
         {
             InitializeComponent();
-        }
 
-        private void ToggleSwitch_Checked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            var switchBtn = e.Source as ToggleSwitch;
-            if(switchBtn!.IsChecked!.Value)
+            this.GetObservable(WindowStateProperty).Subscribe(state =>
             {
-                this.RendererDiagnostics.DebugOverlays =
-                RendererDebugOverlays.Fps |
-                RendererDebugOverlays.LayoutTimeGraph |
-                RendererDebugOverlays.RenderTimeGraph;
-            } else
+                if (state == WindowState.Normal)
+                {
+                    Width = 1200;
+                    Height = 600;
+                }
+            });
+
+            MessageBus.Current.Listen<DebugOverlayRequest>().Subscribe(msg =>
             {
-                this.RendererDiagnostics.DebugOverlays = RendererDebugOverlays.None;
-            }
+                if(msg.Show)
+                {
+                    this.RendererDiagnostics.DebugOverlays =
+                    RendererDebugOverlays.Fps |
+                    RendererDebugOverlays.LayoutTimeGraph |
+                    RendererDebugOverlays.RenderTimeGraph;
+                } else
+                {
+                    this.RendererDiagnostics.DebugOverlays = RendererDebugOverlays.None;
+                }
+            });
+
         }
     }
 }

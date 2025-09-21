@@ -2,8 +2,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:lang="using:sephp.I18n"
+			 xmlns:vm="using:sephp.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-			 x:CompileBindings="True"
-             x:Class="sephp.Views.SettingView">
-	<TextBlock Text="{ReflectionBinding UrlPathSegment}" />
+			 x:CompileBindings="True" Margin="10"
+             x:Class="sephp.Views.SettingView"
+			 x:DataType="vm:SettingViewModel">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<HeaderedContentControl 
+			Grid.Row="0"
+			Theme="{DynamicResource GroupBox}">
+			<HeaderedContentControl.Header>
+				<Panel>
+					<TextBlock Text="其他设置" />
+				</Panel>
+			</HeaderedContentControl.Header>
+			<HeaderedContentControl.Content>
+				<ListBox>
+					<ListBoxItem>
+						<DockPanel>
+							<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resource.DebugMode}" DockPanel.Dock="Left" />
+							<ToggleSwitch
+								Theme="{StaticResource SimpleToggleSwitch}"
+								IsChecked="{Binding ShowDebugOverlay}"
+								Command="{Binding ToggleDebugModeCommand}"
+								DockPanel.Dock="Right"/>
+							<TextBlock VerticalAlignment="Center" Text="" />
+						</DockPanel>
+
+					</ListBoxItem>
+					<ListBoxItem Content="启用调试模式" />
+				</ListBox>
+			</HeaderedContentControl.Content>
+		</HeaderedContentControl>
+	</Grid>
 </UserControl>

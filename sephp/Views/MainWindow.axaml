@@ -160,7 +160,6 @@
 							Content="{x:Static lang:Resource.About}" 
 							Icon="{StaticResource IconAbout}" 
 							IconColor="{DynamicResource SemiColorText0}" />
-						<ToggleSwitch Theme="{StaticResource SimpleToggleSwitch}" IsCheckedChanged="ToggleSwitch_Checked" Content="{x:Static lang:Resource.DebugMode}"/>
 					</StackPanel>
 				</ScrollViewer>
 			</SplitView.Pane>

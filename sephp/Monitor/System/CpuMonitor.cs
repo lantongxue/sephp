@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace sephp.Monitor.System
 {
-    public class Cpu
+    public class CpuMonitor
     {
 
         private CpuWindows? windows = null;

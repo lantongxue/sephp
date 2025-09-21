@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace sephp.Monitor.System
 {
-    public class Memory
+    public class MemoryMonitor
     {
 
         private MemoryWindows? windows = null;
