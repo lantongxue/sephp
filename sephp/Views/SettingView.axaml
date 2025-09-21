@@ -28,7 +28,7 @@
 							<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resource.DebugMode}" DockPanel.Dock="Left" />
 							<ToggleSwitch
 								Theme="{StaticResource SimpleToggleSwitch}"
-								IsChecked="{Binding ShowDebugOverlay}"
+								IsChecked="{Binding Settings.DebugOverlay}"
 								Command="{Binding ToggleDebugModeCommand}"
 								DockPanel.Dock="Right"/>
 							<TextBlock VerticalAlignment="Center" Text="" />

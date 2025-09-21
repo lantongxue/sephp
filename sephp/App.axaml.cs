@@ -1,8 +1,12 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using sephp.Models;
+using sephp.Services.Config;
+using sephp.Services.Interfaces;
 using sephp.ViewModels;
 using sephp.Views;
+using Splat;
 
 namespace sephp
 {
@@ -15,6 +19,9 @@ namespace sephp
 
         public override void OnFrameworkInitializationCompleted()
         {
+
+            RegisterMyServices();
+
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow = new MainWindow
@@ -24,6 +31,13 @@ namespace sephp
             }
 
             base.OnFrameworkInitializationCompleted();
+        }
+
+        protected void RegisterMyServices()
+        {
+            Locator.CurrentMutable.RegisterLazySingleton<IConfigService<AppSettings>>(
+                () => new YamlConfigService<AppSettings>("Config/app.yaml")
+            );
         }
 
     }

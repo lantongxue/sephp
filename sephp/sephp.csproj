@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
@@ -33,6 +32,7 @@
     <PackageReference Include="Semi.Avalonia" Version="11.2.1.9" />
     <PackageReference Include="Svg.Controls.Skia.Avalonia" Version="11.3.6.2" />
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.0-rc.1.25451.107" />
+    <PackageReference Include="YamlDotNet" Version="16.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,5 +75,11 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Config\app.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

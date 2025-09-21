@@ -3,6 +3,9 @@ using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 using sephp.I18n;
 using sephp.MessageBusRequests;
+using sephp.Models;
+using sephp.Services.Interfaces;
+using Splat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,18 +20,25 @@ namespace sephp.ViewModels
 
         public IScreen HostScreen { get; }
 
-        public bool ShowDebugOverlay { get;set; } = false;
+        private readonly IConfigService<AppSettings> _config;
+
+        public AppSettings Settings => _config.Settings;
 
         public SettingViewModel(IScreen screen)
         {
             HostScreen = screen;
+
+            _config = Locator.Current.GetService<IConfigService<AppSettings>>()!;
+
+            _config.OnChanged += _ => this.RaisePropertyChanged(nameof(Settings));
+
         }
 
         [ReactiveCommand]
         private void ToggleDebugMode()
         {
-            MessageBus.Current.SendMessage(new DebugOverlayRequest(ShowDebugOverlay));
-
+            MessageBus.Current.SendMessage(new DebugOverlayRequest(Settings.DebugOverlay));
+            _config.Save();
         }
     }
 }
