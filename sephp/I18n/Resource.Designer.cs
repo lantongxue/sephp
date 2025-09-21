@@ -160,6 +160,15 @@ namespace sephp.I18n {
         }
         
         /// <summary>
+        ///   查找类似 Other 的本地化字符串。
+        /// </summary>
+        public static string Setting_Other {
+            get {
+                return ResourceManager.GetString("Setting_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Switch Dark/Light mode 的本地化字符串。
         /// </summary>
         public static string SwitchDarkOrLightMode {

@@ -18,7 +18,7 @@
 			Theme="{DynamicResource GroupBox}">
 			<HeaderedContentControl.Header>
 				<Panel>
-					<TextBlock Text="其他设置" />
+					<TextBlock Text="{x:Static lang:Resource.Setting_Other}" />
 				</Panel>
 			</HeaderedContentControl.Header>
 			<HeaderedContentControl.Content>
@@ -33,9 +33,7 @@
 								DockPanel.Dock="Right"/>
 							<TextBlock VerticalAlignment="Center" Text="" />
 						</DockPanel>
-
 					</ListBoxItem>
-					<ListBoxItem Content="启用调试模式" />
 				</ListBox>
 			</HeaderedContentControl.Content>
 		</HeaderedContentControl>

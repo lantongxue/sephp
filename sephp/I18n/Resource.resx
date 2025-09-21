@@ -150,6 +150,9 @@
   <data name="Setting" xml:space="preserve">
     <value>Setting</value>
   </data>
+  <data name="Setting_Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
   <data name="SwitchDarkOrLightMode" xml:space="preserve">
     <value>Switch Dark/Light mode</value>
   </data>

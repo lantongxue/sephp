@@ -150,6 +150,9 @@
   <data name="Setting" xml:space="preserve">
     <value>设置</value>
   </data>
+  <data name="Setting_Other" xml:space="preserve">
+    <value>其他设置</value>
+  </data>
   <data name="SwitchDarkOrLightMode" xml:space="preserve">
     <value>切换暗/明模式</value>
   </data>
