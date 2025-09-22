@@ -33,9 +33,7 @@
 								DockPanel.Dock="Right"/>
 							<TextBlock VerticalAlignment="Center" Text="" />
 						</DockPanel>
-
 					</ListBoxItem>
-					<ListBoxItem Content="启用调试模式" />
 				</ListBox>
 			</HeaderedContentControl.Content>
 		</HeaderedContentControl>
