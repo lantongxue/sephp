@@ -1,22 +1,12 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Markup.Xaml.Styling;
-using Avalonia.Media;
 using Avalonia.Styling;
-using DynamicData;
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 using Semi.Avalonia;
-using sephp.I18n;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Reactive;
-using System.Reactive.Linq;
-using System.Resources;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -153,6 +143,9 @@ namespace sephp.ViewModels
             if (app is null) return;
             app.RequestedThemeVariant = obj as ThemeVariant;
             app.UnregisterFollowSystemTheme();
+
+            var a = Thread.CurrentThread.CurrentCulture;
+            
         }
 
         public async Task OpenRepoUrl()

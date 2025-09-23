@@ -1,34 +1,54 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using System.Text.RegularExpressions;
+using System.Threading;
+using sephp.Monitor.System.Api;
 
 namespace sephp.Monitor.System
 {
     public class CpuDarwin
     {
+        
+        
+        static Darwin.host_cpu_load_info GetCpuLoadInfo()
+        {
+            int count = Darwin.HOST_CPU_LOAD_INFO_COUNT;
+            int size = Marshal.SizeOf(typeof(Darwin.host_cpu_load_info));
+            IntPtr ptr = Marshal.AllocHGlobal(size);
+
+            try
+            {
+                int result = Darwin.host_statistics(Darwin.mach_host_self(),
+                    Darwin.HOST_CPU_LOAD_INFO,
+                    ptr,
+                    ref count);
+
+                if (result != 0)
+                {
+                    throw new Exception("host_statistics failed: " + result);
+                }
+                return (Darwin.host_cpu_load_info)Marshal.PtrToStructure(ptr, typeof(Darwin.host_cpu_load_info));
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(ptr);
+            }
+        }
+        
         public async Task<double> GetCpuUsageAsync()
         {
-            var psi = new ProcessStartInfo
-            {
-                FileName = "top",
-                Arguments = "-l 1 | grep 'CPU usage'",
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
+            var info1 = GetCpuLoadInfo();
+            Thread.Sleep(1000); // 采样间隔 1 秒
+            var info2 = GetCpuLoadInfo();
 
-            using (var process = Process.Start(psi))
-            {
-                var output = await process.StandardOutput.ReadToEndAsync();
-                process.WaitForExit();
+            uint user = info2.cpu_ticks[0] - info1.cpu_ticks[0];
+            uint system = info2.cpu_ticks[1] - info1.cpu_ticks[1];
+            uint idle = info2.cpu_ticks[2] - info1.cpu_ticks[2];
+            uint nice = info2.cpu_ticks[3] - info1.cpu_ticks[3];
 
-                var match = Regex.Match(output, @"(\d+\.\d+)% user");
-                if (match.Success)
-                {
-                    return double.Parse(match.Groups[1].Value);
-                }
-            }
-            return -1;
+            uint total = user + system + idle + nice;
+
+            return Math.Round((user + system + nice) * 100.0 / total, 2);
         }
     }
 }

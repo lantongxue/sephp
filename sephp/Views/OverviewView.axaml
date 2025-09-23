@@ -30,6 +30,7 @@
 				<lvc:CartesianChart.Title>
 					<lvc:XamlDrawnLabelVisual
 						Text="CPU"
+						Theme="{DynamicResource TitleTextBlock}"
 						Paint="{lvc:SolidColorPaint Color='#303030'}"
 						TextSize="15" />
 				</lvc:CartesianChart.Title>
@@ -46,6 +47,7 @@
 				<lvc:CartesianChart.Title>
 					<lvc:XamlDrawnLabelVisual
 						Text="RAM"
+						Theme="{DynamicResource TitleTextBlock}"
 						Paint="{lvc:SolidColorPaint Color='#303030'}"
 						TextSize="15" />
 				</lvc:CartesianChart.Title>
@@ -62,6 +64,7 @@
 				<lvc:CartesianChart.Title>
 					<lvc:XamlDrawnLabelVisual
 						Text="Network"
+						Theme="{DynamicResource TitleTextBlock}"
 						Paint="{lvc:SolidColorPaint Color='#303030'}"
 						TextSize="15" />
 				</lvc:CartesianChart.Title>
