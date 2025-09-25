@@ -5,9 +5,9 @@ VisualStudioVersion = 17.14.36212.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sephp", "sephp\sephp.csproj", "{EB63EBCE-2081-4657-A620-B2F139F9E0C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sephp.Nginx", "sephp.nginx\sephp.Nginx.csproj", "{0318125E-29E6-417D-BB15-058E31051BC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sephp.Nginx", "sephp.Nginx\sephp.Nginx.csproj", "{0318125E-29E6-417D-BB15-058E31051BC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sephp.Addon", "sephp.addon\sephp.Addon.csproj", "{205089F6-ECC6-4415-8085-6A828D697F50}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sephp.Addon", "sephp.Addon\sephp.Addon.csproj", "{205089F6-ECC6-4415-8085-6A828D697F50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

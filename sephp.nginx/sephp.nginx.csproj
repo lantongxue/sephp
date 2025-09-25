@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\sephp.addon\sephp.Addon.csproj" />
+    <ProjectReference Include="..\sephp.Addon\sephp.Addon.csproj" />
   </ItemGroup>
 
   <ItemGroup>

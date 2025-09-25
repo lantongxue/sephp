@@ -37,8 +37,11 @@ namespace sephp
                 return null;
             }
 
-            var viewName = viewModel.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
-            var viewType = Type.GetType(viewName);
+            var viewModelType = viewModel.GetType();
+            var assembly = viewModelType.Assembly;
+
+            var viewName = viewModelType.FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
+            var viewType = assembly.GetType(viewName);
             if (viewType != null)
             {
                 var view = Activator.CreateInstance(viewType) as UserControl;

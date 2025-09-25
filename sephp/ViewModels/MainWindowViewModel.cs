@@ -5,12 +5,12 @@ using Avalonia.Styling;
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 using Semi.Avalonia;
-using sephp.Nginx.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using sephp.Nginx.ViewModels;
 
 namespace sephp.ViewModels
 {
