@@ -13,6 +13,7 @@
   
     <Application.Styles>
 		<semi:SemiTheme Locale="zh-CN" />
+		<StyleInclude Source="Styles/Styles.axaml" />
     </Application.Styles>
 	<Application.Resources>
 		<ResourceDictionary>

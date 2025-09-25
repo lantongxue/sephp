@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:rxui="http://reactiveui.net"
+		xmlns:semi="clr-namespace:Semi.Avalonia.Controls;assembly=Semi.Avalonia"
 		xmlns:lang="using:sephp.I18n"
 		xmlns:controls="using:sephp.Controls"
 		xmlns:views="using:sephp.Views"
@@ -23,23 +24,6 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-	<Window.Resources>
-		<ControlTheme x:Key="CategoryTabItem" TargetType="TabItem">
-			<Setter Property="IsEnabled" Value="False" />
-			<Setter Property="Template">
-				<ControlTemplate TargetType="TabItem">
-					<TextBlock
-                        FontWeight="Bold"
-                        FontSize="12"
-                        Margin="4"
-                        Text="{TemplateBinding Header}" />
-				</ControlTemplate>
-			</Setter>
-			<Style Selector="^:disabled /template/ TextBlock">
-				<Setter Property="Foreground" Value="{DynamicResource SemiColorText1}" />
-			</Style>
-		</ControlTheme>
-	</Window.Resources>
 	<Grid RowDefinitions="Auto, *">
 		<Border
 			Grid.Row="0"
@@ -66,6 +50,35 @@
 						Classes="Secondary" />
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+					<Button
+						Theme="{DynamicResource IconBorderlessButton}"
+						Content="{StaticResource SemiIconFilledArrowDown}"
+						ToolTip.Tip="{x:Static lang:Resource.BackgroundTask}">
+						<Button.Flyout>
+							<Flyout Placement="Bottom">
+								<TextBlock Text="123213" />
+							</Flyout>
+						</Button.Flyout>
+						<Button.ContentTemplate>
+							<DataTemplate>
+								<ProgressBar
+									Width="24"
+									Height="24"
+									BorderThickness="2"
+									Theme="{DynamicResource ProgressRing}"
+									Maximum="100"
+									Value="66"
+									ShowProgressText="True"
+									ProgressTextFormat="\{0\}">
+									<ProgressBar.Styles>
+										<Style Selector="TextBlock">
+											<Setter Property="FontSize" Value="10"/>
+										</Style>
+									</ProgressBar.Styles>
+								</ProgressBar>
+							</DataTemplate>
+						</Button.ContentTemplate>
+					</Button>
 					<Button
 						Theme="{DynamicResource IconBorderlessButton}"
 						Command="{Binding OpenRepoUrl}"

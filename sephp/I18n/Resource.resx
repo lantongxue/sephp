@@ -126,6 +126,9 @@
   <data name="AppName" xml:space="preserve">
     <value>SEPHP</value>
   </data>
+  <data name="BackgroundTask" xml:space="preserve">
+    <value>Background Task</value>
+  </data>
   <data name="DebugMode" xml:space="preserve">
     <value>Debug Mode</value>
   </data>

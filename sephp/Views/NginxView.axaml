@@ -2,7 +2,54 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="sephp.Views.NginxView">
-	Nginx
+			 xmlns:vm="using:sephp.ViewModels"
+			 x:DataType="vm:NginxViewModel"
+             x:Class="sephp.Views.NginxView"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Margin="10">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<Border Grid.Row="0" Theme="{StaticResource CardBorder}">
+			<WrapPanel ItemSpacing="10">
+				<StackPanel Orientation="Horizontal" Spacing="10">
+					<Button Classes="Success" Content="启动" IsEnabled="{Binding !IsRunning}" Click="Button_Click" />
+					<Button Classes="Danger" Content="停止" IsEnabled="{Binding IsRunning}" />
+					<Button Classes="Warning" Content="重启" />
+					<Button Classes="Secondary" IsEnabled="{Binding IsRunning}" Content="重载配置" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<PathIcon
+                        Theme="{DynamicResource InnerPathIcon}"
+						Margin="0,0,2,0"
+						Data="{StaticResource SemiIconAlertCircle}"
+						ToolTip.Tip="可以在首页一键快速启动"/>
+					<TextBlock Margin="0,0,5,0" Text="加入快速启动组" VerticalAlignment="Center" />
+					<ToggleSwitch Theme="{StaticResource SimpleToggleSwitch}" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<PathIcon
+                        Theme="{DynamicResource InnerPathIcon}"
+						Margin="0,0,2,0"
+						Data="{StaticResource SemiIconAlertCircle}"
+						ToolTip.Tip="加入后永久生效"/>
+					<TextBlock Margin="0,0,5,0" Text="加入系统环境变量" VerticalAlignment="Center" />
+					<ToggleSwitch Theme="{StaticResource SimpleToggleSwitch}" />
+				</StackPanel>
+			</WrapPanel>
+		</Border>
+		<TabControl
+			Grid.Row="1"
+			Theme="{StaticResource CardTabControl}">
+			<TabItem Padding="10" Header="基本配置">
+				<Grid>
+					
+				</Grid>
+			</TabItem>
+			<TabItem Padding="10" Header="版本管理">
+				
+			</TabItem>
+		</TabControl>
+	</Grid>
 </UserControl>

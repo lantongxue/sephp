@@ -35,7 +35,7 @@ namespace sephp.Monitor.System
             }
         }
         
-        public async Task<double> GetCpuUsageAsync()
+        public Task<double> GetCpuUsageAsync()
         {
             var info1 = GetCpuLoadInfo();
             Thread.Sleep(1000); // 采样间隔 1 秒
@@ -48,7 +48,7 @@ namespace sephp.Monitor.System
 
             uint total = user + system + idle + nice;
 
-            return Math.Round((user + system + nice) * 100.0 / total, 2);
+            return Task.FromResult(Math.Round((user + system + nice) * 100.0 / total, 2));
         }
     }
 }

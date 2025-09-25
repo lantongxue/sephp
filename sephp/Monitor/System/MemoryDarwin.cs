@@ -7,7 +7,7 @@ namespace sephp.Monitor.System
 {
     public class MemoryDarwin
     {
-        public async Task<(double usedMb, double totalMb)> GetMemoryUsageAsync()
+        public Task<(double, double)> GetMemoryUsageAsync()
         {
             // 1. 获取总内存
             ulong len = sizeof(ulong);
@@ -38,7 +38,7 @@ namespace sephp.Monitor.System
 
                 ulong used = active + inactive + wired;
                 
-                return (Math.Round(used / 1024d / 1024, 2), Math.Round(totalMem / 1024d / 1024, 2));
+                return Task.FromResult((Math.Round(used / 1024d / 1024, 2), Math.Round(totalMem / 1024d / 1024, 2)));
             }
             finally
             {

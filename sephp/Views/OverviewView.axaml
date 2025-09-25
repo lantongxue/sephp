@@ -2,10 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:rxui="http://reactiveui.net"
 			 xmlns:lvcCore="using:LiveChartsCore.SkiaSharpView"
 			 xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
 			 xmlns:vm="using:sephp.ViewModels"
+			 xmlns:lang="using:sephp.I18n"
 			 xmlns:sephp="using:sephp.Views"
 			 x:DataType="vm:OverviewViewModel"
              x:Class="sephp.Views.OverviewView"
@@ -13,13 +13,14 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="150" />
+			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
 			<ColumnDefinition />
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
-		<Border Grid.Column="0" Classes="Hover" Theme="{StaticResource CardBorder}" Padding="2">
+		<Border Grid.Row="0" Grid.Column="0" Classes="Hover" Theme="{StaticResource CardBorder}" Padding="2">
 			<lvc:CartesianChart Series="{Binding CpuSeries}">
 				<lvc:CartesianChart.XAxes>
 					<lvcCore:Axis LabelsPaint="{x:Null}" SeparatorsPaint="{lvc:SolidColorPaint Color='#64b4b4b4'}" />
@@ -36,7 +37,7 @@
 				</lvc:CartesianChart.Title>
 			</lvc:CartesianChart>
 		</Border>
-		<Border Grid.Column="1" Classes="Hover" Theme="{StaticResource CardBorder}" Padding="2">
+		<Border Grid.Row="0" Grid.Column="1" Classes="Hover" Theme="{StaticResource CardBorder}" Padding="2">
 			<lvc:CartesianChart Series="{Binding MemorySeries}">
 				<lvc:CartesianChart.XAxes>
 					<lvcCore:Axis LabelsPaint="{x:Null}" SeparatorsPaint="{lvc:SolidColorPaint Color='#64b4b4b4'}" />
@@ -53,7 +54,7 @@
 				</lvc:CartesianChart.Title>
 			</lvc:CartesianChart>
 		</Border>
-		<Border Grid.Column="2" Classes="Hover" Theme="{StaticResource CardBorder}" Padding="2">
+		<Border Grid.Row="0" Grid.Column="2" Classes="Hover" Theme="{StaticResource CardBorder}" Padding="2">
 			<lvc:CartesianChart Series="{Binding NetworkSeries}">
 				<lvc:CartesianChart.XAxes>
 					<lvcCore:Axis LabelsPaint="{x:Null}" SeparatorsPaint="{lvc:SolidColorPaint Color='#64b4b4b4'}" />
@@ -70,5 +71,48 @@
 				</lvc:CartesianChart.Title>
 			</lvc:CartesianChart>
 		</Border>
+
+		<HeaderedContentControl
+			Grid.Row="1"
+			Theme="{DynamicResource GroupBox}">
+			<HeaderedContentControl.Header>
+				<Panel>
+					<TextBlock Text="快速启动" />
+					<ToggleSwitch Theme="{StaticResource SimpleToggleSwitch}"
+								  HorizontalAlignment="Right" />
+				</Panel>
+			</HeaderedContentControl.Header>
+			<HeaderedContentControl.Content>
+				<ListBox>
+					<ListBoxItem>
+						<DockPanel>
+							<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resource.Apache}" DockPanel.Dock="Left" />
+							<ToggleSwitch
+								Theme="{StaticResource SimpleToggleSwitch}"
+								DockPanel.Dock="Right" />
+							<TextBlock VerticalAlignment="Center" Text="" />
+						</DockPanel>
+					</ListBoxItem>
+					<ListBoxItem>
+						<DockPanel>
+							<TextBlock VerticalAlignment="Center" Text="Nginx" DockPanel.Dock="Left" />
+							<ToggleSwitch
+								Theme="{StaticResource SimpleToggleSwitch}"
+								DockPanel.Dock="Right"/>
+							<TextBlock VerticalAlignment="Center" Text="" />
+						</DockPanel>
+					</ListBoxItem>
+					<ListBoxItem>
+						<DockPanel>
+							<TextBlock VerticalAlignment="Center" Text="PHP-FPM" DockPanel.Dock="Left" />
+							<ToggleSwitch
+								Theme="{StaticResource SimpleToggleSwitch}"
+								DockPanel.Dock="Right"/>
+							<TextBlock VerticalAlignment="Center" Text="" />
+						</DockPanel>
+					</ListBoxItem>
+				</ListBox>
+			</HeaderedContentControl.Content>
+		</HeaderedContentControl>
 	</Grid>
 </UserControl>

@@ -1,0 +1,63 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Style Selector="HeaderedContentControl">
+		<Setter Property="Margin" Value="5"/>
+	</Style>
+
+	<Style Selector="TabControl">
+		<Setter Property="Margin" Value="5"/>
+	</Style>
+	<Style Selector="Button.Loading">
+		<Setter Property="IsEnabled" Value="False" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<Grid>
+						<!-- 原始按钮内容 -->
+						<ContentPresenter
+							Name="PART_ContentPresenter"
+							Padding="{TemplateBinding Padding}"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Stretch"
+							HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+							VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+							BackgroundSizing="{TemplateBinding BackgroundSizing}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							CornerRadius="{TemplateBinding CornerRadius}"
+							Content="{TemplateBinding Content}"
+							ContentTemplate="{TemplateBinding ContentTemplate}"
+							RecognizesAccessKey="True"
+							TextElement.FontSize="{TemplateBinding FontSize}"
+							TextElement.FontWeight="{TemplateBinding FontWeight}"
+							UseLayoutRounding="False" />
+
+						<!-- Loading 层 -->
+						<Border Background="#26000000"
+								ZIndex="1"
+								CornerRadius="{TemplateBinding CornerRadius}">
+							<PathIcon
+								Theme="{DynamicResource InnerPathIcon}"
+								Foreground="White"
+								Data="{StaticResource SemiIconSpin}">
+								<PathIcon.Styles>
+									<Style>
+										<Style.Animations>
+											<Animation IterationCount="Infinite" Duration="0:0:0.6">
+												<KeyFrame Cue="0%">
+													<Setter Property="RotateTransform.Angle" Value="0.0" />
+												</KeyFrame>
+												<KeyFrame Cue="100%">
+													<Setter Property="RotateTransform.Angle" Value="360.0" />
+												</KeyFrame>
+											</Animation>
+										</Style.Animations>
+									</Style>
+								</PathIcon.Styles>
+							</PathIcon>
+						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</Styles>

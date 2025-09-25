@@ -88,6 +88,15 @@ namespace sephp.I18n {
         }
         
         /// <summary>
+        ///   查找类似 Background Task 的本地化字符串。
+        /// </summary>
+        public static string BackgroundTask {
+            get {
+                return ResourceManager.GetString("BackgroundTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Debug Mode 的本地化字符串。
         /// </summary>
         public static string DebugMode {
