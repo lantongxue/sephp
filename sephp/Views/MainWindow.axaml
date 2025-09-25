@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:rxui="http://reactiveui.net"
-		xmlns:lang="using:sephp.I18n"
+		xmlns:lang="using:sephp.Locale"
 		xmlns:controls="using:sephp.Controls"
 		xmlns:models="using:sephp.ViewModels"
 		xmlns:sephp="using:sephp"

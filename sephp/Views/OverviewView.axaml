@@ -5,7 +5,7 @@
 			 xmlns:lvcCore="using:LiveChartsCore.SkiaSharpView"
 			 xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
 			 xmlns:vm="using:sephp.ViewModels"
-			 xmlns:lang="using:sephp.I18n"
+			 xmlns:lang="using:sephp.Locale"
 			 xmlns:sephp="using:sephp.Views"
 			 x:DataType="vm:OverviewViewModel"
              x:Class="sephp.Views.OverviewView"

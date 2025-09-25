@@ -6,7 +6,7 @@ using LiveChartsCore.Kernel;
 using LiveChartsCore.SkiaSharpView;
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;
-using sephp.I18n;
+using sephp.Locale;
 using System;
 using System.Collections.ObjectModel;
 

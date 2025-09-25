@@ -37,11 +37,11 @@
 
 
 	<ItemGroup>
-	  <ProjectReference Include="..\sephp.nginx\sephp.Nginx.csproj" />
+	  <ProjectReference Include="..\sephp.Nginx\sephp.Nginx.csproj" />
 	</ItemGroup>
 
   <ItemGroup>
-    <Compile Update="I18n\Resource.Designer.cs">
+    <Compile Update="Locale\Resource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resource.resx</DependentUpon>
@@ -73,7 +73,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="I18n\Resource.resx">
+    <EmbeddedResource Update="Locale\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>

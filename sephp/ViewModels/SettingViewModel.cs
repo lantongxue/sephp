@@ -1,7 +1,7 @@
 ﻿using Avalonia.Platform;
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;
-using sephp.I18n;
+using sephp.Locale;
 using sephp.MessageBusRequests;
 using sephp.Models;
 using sephp.Services.Interfaces;
