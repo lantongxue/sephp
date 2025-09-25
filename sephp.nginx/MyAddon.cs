@@ -1,10 +1,10 @@
-﻿using sephp.addon;
+﻿using sephp.Addon;
 
 namespace sephp.Nginx
 {
-    public class Bootstrap : Addon
+    public class MyAddon : IAddon
     {
-        public override Information GetInformation()
+        public Information GetInformation()
         {
             return new Information()
             {

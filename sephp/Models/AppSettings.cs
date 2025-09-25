@@ -13,5 +13,8 @@ namespace sephp.Models
         public double Width { get; set; } = 1200;
 
         public double Height { get; set; } = 600;
+        
+        public Package[] DefaultPackages { get; set; }
     }
+
 }

@@ -30,7 +30,7 @@
 			Theme="{DynamicResource CardBorder}">
 			<Panel>
 				<StackPanel Orientation="Horizontal" Spacing="8">
-					<ToggleSwitch IsChecked="{Binding #menu.IsPaneOpen}"
+					<ToggleSwitch IsChecked="{Binding #Menu.IsPaneOpen}"
 						Theme="{DynamicResource IconBorderlessToggleSwitch}"
 						OnContent="{StaticResource SemiIconApps}"
 						OffContent="{StaticResource SemiIconAppCenter}"/>
@@ -111,62 +111,62 @@
 			IsPaneOpen="True"
 			DisplayMode="CompactInline"
 			CompactPaneLength="58"
-			Name="menu"
+			x:Name="Menu"
 			OpenPaneLength="200">
 			<SplitView.Pane>
 				<ScrollViewer>
 					<StackPanel>
 						<controls:NavigationMenuItem
-							Command="{Binding GoView}"
+							Command="{Binding GoViewCommand}"
 							CommandParameter="Overview"
 							Content="{x:Static lang:Resource.Overview}"
 							IsChecked="True"
 							Icon="{StaticResource IconOverview}"
 							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem 
-							Command="{Binding GoView}" 
+							Command="{Binding GoViewCommand}" 
 							CommandParameter="Website" 
 							Content="{x:Static lang:Resource.Website}" 
 							Icon="{StaticResource IconWebsite}" 
 							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem 
-							Command="{Binding GoView}" 
+							Command="{Binding GoViewCommand}" 
 							CommandParameter="PHP" 
 							Content="{x:Static lang:Resource.PHP}" 
 							Icon="{StaticResource IconPHP}" 
 							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem 
-							Command="{Binding GoView}" 
-							CommandParameter="MySQL" 
-							Content="{x:Static lang:Resource.MySQL}" 
-							Icon="{StaticResource IconMySQL}" 
-							IconColor="{DynamicResource SemiColorText0}" />
-						<controls:NavigationMenuItem 
-							Command="{Binding GoView}" 
-							CommandParameter="Redis" 
-							Content="{x:Static lang:Resource.Redis}" 
-							Icon="{StaticResource IconRedis}" 
-							IconColor="{DynamicResource SemiColorText0}" />
-						<controls:NavigationMenuItem 
-							Command="{Binding GoView}" 
+							Command="{Binding GoViewCommand}" 
 							CommandParameter="Nginx" 
 							Content="{x:Static lang:Resource.Nginx}" 
 							Icon="{StaticResource IconNginx}" 
 							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem 
-							Command="{Binding GoView}" 
+							Command="{Binding GoViewCommand}" 
+							CommandParameter="MySQL" 
+							Content="{x:Static lang:Resource.MySQL}" 
+							Icon="{StaticResource IconMySQL}" 
+							IconColor="{DynamicResource SemiColorText0}" />
+						<controls:NavigationMenuItem 
+							Command="{Binding GoViewCommand}" 
+							CommandParameter="Redis" 
+							Content="{x:Static lang:Resource.Redis}" 
+							Icon="{StaticResource IconRedis}" 
+							IconColor="{DynamicResource SemiColorText0}" />
+						<controls:NavigationMenuItem 
+							Command="{Binding GoViewCommand}" 
 							CommandParameter="Apache" 
 							Content="{x:Static lang:Resource.Apache}" 
 							Icon="{StaticResource IconApache}" 
 							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem
-							Command="{Binding GoView}"
+							Command="{Binding GoViewCommand}"
 							CommandParameter="Setting"
 							Content="{x:Static lang:Resource.Setting}"
 							Icon="{StaticResource SemiIconSettingStroked}"
 							IconColor="{DynamicResource SemiColorText0}" />
 						<controls:NavigationMenuItem 
-							Command="{Binding GoView}" 
+							Command="{Binding GoViewCommand}" 
 							CommandParameter="About" 
 							Content="{x:Static lang:Resource.About}" 
 							Icon="{StaticResource IconAbout}" 

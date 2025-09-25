@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sephp.addon
+namespace sephp.Addon
 {
     public class Information
     {

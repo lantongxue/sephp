@@ -18,9 +18,8 @@ namespace sephp.ViewModels
     {
         public RoutingState Router { get; } = new RoutingState();
 
-        public string RepoUrl { get; } = "https://github.com/lantongxue/sephp";
-
-        public ReactiveCommand<string, IRoutableViewModel> GoView { get; }
+        [Reactive]
+        private string? _repoUrl  = "https://github.com/lantongxue/sephp";
 
         [Reactive]
         private string? _currentPageTitle;
@@ -79,17 +78,15 @@ namespace sephp.ViewModels
                 }
             });
 
-            GoView = ReactiveCommand.CreateFromObservable<string, IRoutableViewModel>(GoViewExecute);
-
             Router.Navigate.Execute(new OverviewViewModel(this));
         }
-
-        private IObservable<IRoutableViewModel> GoViewExecute(string param)
+        
+        [ReactiveCommand]
+        private IObservable<IRoutableViewModel> GoView(string param)
         {
             IRoutableViewModel? viewModel = null;
             switch (param)
             {
-
                 case "Website":
                     viewModel = new WebsiteViewModel(this);
                     break;
@@ -154,7 +151,7 @@ namespace sephp.ViewModels
             var launcher = ResolveDefaultTopLevel()?.Launcher;
             if (launcher is not null)
             {
-                await launcher.LaunchUriAsync(new Uri(RepoUrl));
+                await launcher.LaunchUriAsync(new Uri(RepoUrl!));
             }
         }
 
