@@ -117,43 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About" xml:space="preserve">
-    <value>关于</value>
-  </data>
-  <data name="Apache" xml:space="preserve">
-    <value>Apache</value>
-  </data>
-  <data name="AppName" xml:space="preserve">
-    <value>SEPHP</value>
-  </data>
-  <data name="DebugMode" xml:space="preserve">
-    <value>调试模式</value>
-  </data>
-  <data name="MySQL" xml:space="preserve">
-    <value>MySQL</value>
-  </data>
   <data name="Nginx" xml:space="preserve">
     <value>Nginx</value>
-  </data>
-  <data name="Overview" xml:space="preserve">
-    <value>概览</value>
-  </data>
-  <data name="PHP" xml:space="preserve">
-    <value>PHP</value>
-  </data>
-  <data name="Redis" xml:space="preserve">
-    <value>Redis</value>
-  </data>
-  <data name="RepoName" xml:space="preserve">
-    <value>GitHub</value>
-  </data>
-  <data name="Setting" xml:space="preserve">
-    <value>设置</value>
-  </data>
-  <data name="SwitchDarkOrLightMode" xml:space="preserve">
-    <value>切换暗/明模式</value>
-  </data>
-  <data name="Website" xml:space="preserve">
-    <value>网站管理</value>
   </data>
 </root>

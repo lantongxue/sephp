@@ -29,11 +29,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Semi.Avalonia" Version="11.2.1.9" />
+    <PackageReference Include="Semi.Avalonia" Version="11.2.1.10" />
     <PackageReference Include="Svg.Controls.Skia.Avalonia" Version="11.3.6.2" />
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.0-rc.1.25451.107" />
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
   </ItemGroup>
+
+
+	<ItemGroup>
+	  <ProjectReference Include="..\sephp.nginx\sephp.Nginx.csproj" />
+	</ItemGroup>
 
   <ItemGroup>
     <Compile Update="I18n\Resource.Designer.cs">
@@ -49,9 +54,6 @@
     </Compile>
     <Compile Update="Views\ApacheView.axaml.cs">
       <DependentUpon>ApacheView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\NginxView.axaml.cs">
-      <DependentUpon>NginxView.axaml</DependentUpon>
     </Compile>
     <Compile Update="Views\OverviewView.axaml.cs">
       <DependentUpon>OverviewView.axaml</DependentUpon>

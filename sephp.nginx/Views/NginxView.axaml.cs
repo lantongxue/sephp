@@ -4,10 +4,10 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using DynamicData.Binding;
 using ReactiveUI;
-using sephp.ViewModels;
+using sephp.Nginx.ViewModels;
 using System.Reactive.Linq;
 
-namespace sephp.Views;
+namespace sephp.Nginx.Views;
 
 public partial class NginxView : ReactiveUserControl<NginxViewModel>
 {
