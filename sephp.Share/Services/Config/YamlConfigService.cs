@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.IO;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
-using sephp.Services.Interfaces;
+using sephp.Share.Services.Interfaces;
 
-namespace sephp.Services.Config
+namespace sephp.Share.Services.Config
 {
     public class YamlConfigService<T> : IConfigService<T> where T : new()
     {

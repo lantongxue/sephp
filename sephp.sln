@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sephp.Nginx", "sephp.Nginx\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sephp.Addon", "sephp.Addon\sephp.Addon.csproj", "{205089F6-ECC6-4415-8085-6A828D697F50}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sephp.Share", "sephp.Share\sephp.Share.csproj", "{752A6D66-35C1-42DF-9E27-0596A9678505}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{205089F6-ECC6-4415-8085-6A828D697F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{205089F6-ECC6-4415-8085-6A828D697F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{205089F6-ECC6-4415-8085-6A828D697F50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{752A6D66-35C1-42DF-9E27-0596A9678505}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{752A6D66-35C1-42DF-9E27-0596A9678505}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{752A6D66-35C1-42DF-9E27-0596A9678505}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{752A6D66-35C1-42DF-9E27-0596A9678505}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

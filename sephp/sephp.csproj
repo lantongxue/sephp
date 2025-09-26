@@ -38,6 +38,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\sephp.Nginx\sephp.Nginx.csproj" />
+	  <ProjectReference Include="..\sephp.Share\sephp.Share.csproj" />
 	</ItemGroup>
 
   <ItemGroup>
@@ -80,7 +81,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Config\app.yaml">
+    <None Update="Config\sephp.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

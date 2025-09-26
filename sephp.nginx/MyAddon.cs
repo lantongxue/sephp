@@ -1,10 +1,11 @@
 ﻿using sephp.Addon;
+using sephp.Nginx.Models;
 
 namespace sephp.Nginx
 {
-    public class MyAddon : IAddon
+    public class MyAddon : BaseAddon
     {
-        public Information GetInformation()
+        public override Information GetInformation()
         {
             return new Information()
             {
@@ -14,6 +15,11 @@ namespace sephp.Nginx
                 Uri = new Uri("https://github.com/lantongxue/sephp"),
                 Version = new Version(1, 0, 0)
             };
+        }
+
+        public void Bootstrap()
+        {
+            this.RegisterConfig<NginxConfig>("Config/nginx.yaml");
         }
     }
 }

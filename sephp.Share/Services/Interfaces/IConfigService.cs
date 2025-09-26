@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sephp.Services.Interfaces
+namespace sephp.Share.Services.Interfaces
 {
     public interface IConfigService<T> where T : new()
     {

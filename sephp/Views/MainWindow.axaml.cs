@@ -4,7 +4,7 @@ using Avalonia.Rendering;
 using ReactiveUI;
 using sephp.MessageBusRequests;
 using sephp.Models;
-using sephp.Services.Interfaces;
+using sephp.Share.Services.Interfaces;
 using Splat;
 using System;
 

@@ -1,0 +1,22 @@
+﻿debugOverlay: false
+width: 1200
+height: 600
+defaultPackages:
+  - id: php
+    version: "8.4.13"
+    binraryDirectory:
+      windows: aaaa
+      linux: bbb
+      darwin: ccc
+  - id: mysql
+    version: "8.4.6"
+    binraryDirectory:
+      windows: aaaa
+      linux: bbb
+      darwin: ccc
+  - id: nginx
+    version: "1.28.0"
+    binraryDirectory:
+      windows: aaaa
+      linux: bbb
+      darwin: ccc

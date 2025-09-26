@@ -2,11 +2,9 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using sephp.Models;
-using sephp.Services.Config;
-using sephp.Services.Interfaces;
+using sephp.Share.Services;
 using sephp.ViewModels;
 using sephp.Views;
-using Splat;
 
 namespace sephp
 {
@@ -35,9 +33,7 @@ namespace sephp
 
         protected void RegisterMyServices()
         {
-            Locator.CurrentMutable.RegisterLazySingleton<IConfigService<AppSettings>>(
-                () => new YamlConfigService<AppSettings>("Config/app.yaml")
-            );
+            ConfigService.RegisterConfig<AppSettings>("Config/sephp.yaml");
         }
 
     }

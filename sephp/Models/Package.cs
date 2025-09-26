@@ -14,17 +14,25 @@ public class Package
     [YamlIgnore]
     public string Directory => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Packages", Id, Version);
     
-    public string BinraryDirectory { get; set; }
+    public PackageBinrary BinraryDirectory { get; set; }
 
     [YamlIgnore]
     public string Executor
     {
         get
         {
-            string executor = Id;
+            string executor = "";
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                executor += ".exe";
+                executor = BinraryDirectory.Windows;
+            }
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                executor = BinraryDirectory.Linux;
+            }
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                executor = BinraryDirectory.Darwin;
             }
             return Path.Combine(Directory, executor);
         }
@@ -34,4 +42,13 @@ public class Package
     {
         return new Version(Version);
     }
+}
+
+public class PackageBinrary
+{
+    public string Windows { get; set; }
+
+    public string Linux { get; set; }
+
+    public string Darwin { get; set; }
 }
