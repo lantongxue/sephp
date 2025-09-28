@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avalonia.Styling;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace sephp.Models
 {
     public class AppSettings
     {
+        public string Theme { get; set; } = "Auto";
         public bool DebugOverlay { get; set; } = false;
 
         public double Width { get; set; } = 1200;

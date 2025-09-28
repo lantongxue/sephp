@@ -77,11 +77,6 @@
 							</DataTemplate>
 						</Button.ContentTemplate>
 					</Button>
-					<Button
-						Theme="{DynamicResource IconBorderlessButton}"
-						Command="{Binding OpenRepoUrl}"
-						Content="{StaticResource SemiIconGithubLogo}" 
-						ToolTip.Tip="{x:Static lang:Resource.RepoName}"/>
 					<ToggleSwitch
 						Theme="{DynamicResource IconBorderlessToggleSwitch}"
 						Command="{Binding ToggleTheme}"
@@ -103,6 +98,11 @@
 								</Style>
 							</Button.Styles>
 					</Button>
+					<Button
+						Theme="{DynamicResource IconBorderlessButton}"
+						Command="{Binding OpenRepoUrl}"
+						Content="{StaticResource SemiIconGithubLogo}"
+						ToolTip.Tip="{x:Static lang:Resource.RepoName}"/>
 				</StackPanel>
 			</Panel>
 		</Border>

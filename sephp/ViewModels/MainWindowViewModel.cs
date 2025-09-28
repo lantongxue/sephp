@@ -5,12 +5,15 @@ using Avalonia.Styling;
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 using Semi.Avalonia;
+using sephp.Models;
+using sephp.Nginx.ViewModels;
+using sephp.Share.Services.Interfaces;
+using Splat;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using sephp.Nginx.ViewModels;
 
 namespace sephp.ViewModels
 {
@@ -24,51 +27,30 @@ namespace sephp.ViewModels
         [Reactive]
         private string? _currentPageTitle;
 
-        [Reactive]
-        private ThemeVariant? _selectedThemeVariant;
+        private readonly IConfigService<AppSettings> _config;
 
-        public IReadOnlyList<MenuItemViewModel> MenuItems { get; }
+        private Dictionary<string, ThemeVariant> _themes = new()
+        {
+            {"Auto", ThemeVariant.Default},
+            {"Aquatic", SemiTheme.Aquatic},
+            {"Desert", SemiTheme.Desert},
+            {"Dusk", SemiTheme.Dusk},
+            {"NightSky", SemiTheme.NightSky}
+        };
+
+        public List<MenuItemViewModel> MenuItems { get; }
         public MainWindowViewModel()
         {
-            MenuItems =
-            [
-                new MenuItemViewModel
+            MenuItems = [];
+            foreach (var theme in _themes)
+            {
+                MenuItems.Add(new MenuItemViewModel
                 {
-                    Header = "Theme",
-                    Items =
-                    [
-                        new MenuItemViewModel
-                        {
-                            Header = "Auto",
-                            Command = FollowSystemThemeCommand
-                        },
-                        new MenuItemViewModel
-                        {
-                            Header = "Aquatic",
-                            Command = SelectThemeCommand,
-                            CommandParameter = SemiTheme.Aquatic
-                        },
-                        new MenuItemViewModel
-                        {
-                            Header = "Desert",
-                            Command = SelectThemeCommand,
-                            CommandParameter = SemiTheme.Desert
-                        },
-                        new MenuItemViewModel
-                        {
-                            Header = "Dusk",
-                            Command = SelectThemeCommand,
-                            CommandParameter = SemiTheme.Dusk
-                        },
-                        new MenuItemViewModel
-                        {
-                            Header = "NightSky",
-                            Command = SelectThemeCommand,
-                            CommandParameter = SemiTheme.NightSky
-                        }
-                    ]
-                }
-            ];
+                    Header = theme.Key,
+                    Command = SelectThemeCommand,
+                    CommandParameter = theme.Key
+                });
+            }
 
             Router.CurrentViewModel.Subscribe(x =>
             {
@@ -77,6 +59,10 @@ namespace sephp.ViewModels
                     CurrentPageTitle = x.UrlPathSegment ?? "Page Error";
                 }
             });
+
+            _config = Locator.Current.GetService<IConfigService<AppSettings>>()!;
+
+            SelectTheme(_config.Settings.Theme);
 
             Router.Navigate.Execute(new OverviewViewModel(this));
         }
@@ -129,20 +115,19 @@ namespace sephp.ViewModels
         }
 
         [ReactiveCommand]
-        private void FollowSystemTheme()
-        {
-            Application.Current?.RegisterFollowSystemTheme();
-        }
-
-        [ReactiveCommand]
-        private void SelectTheme(object? obj)
+        private void SelectTheme(string? key)
         {
             var app = Application.Current;
-            if (app is null) return;
-            app.RequestedThemeVariant = obj as ThemeVariant;
-            app.UnregisterFollowSystemTheme();
+            if (app is null || key is null) return;
 
-            var a = Thread.CurrentThread.CurrentCulture;
+            if(_themes.TryGetValue(key, out var theme))
+            {
+                app.RequestedThemeVariant = theme;
+                app.UnregisterFollowSystemTheme();
+
+                _config.Settings.Theme = key;
+                _config.Save();
+            }
             
         }
 
