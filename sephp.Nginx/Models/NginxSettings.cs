@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace sephp.Nginx.Models
 {
-    public class NginxConfig
+    public class NginxSettings
     {
+        public string? Version { get; set; }
+
+        public int Pid {  get; set; }
     }
 }

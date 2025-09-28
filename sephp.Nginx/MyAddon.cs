@@ -24,7 +24,7 @@ namespace sephp.Nginx
             {
                 _instance = new MyAddon();
             }
-            _instance.RegisterConfig<NginxConfig>("Config/nginx.yaml");
+            _instance.RegisterConfig<NginxSettings>("Config/nginx.yaml");
             return _instance;
         }
     }

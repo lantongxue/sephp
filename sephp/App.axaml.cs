@@ -3,8 +3,10 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using sephp.Models;
 using sephp.Share.Services;
+using sephp.Share.Services.Interfaces;
 using sephp.ViewModels;
 using sephp.Views;
+using Splat;
 
 namespace sephp
 {
@@ -18,6 +20,7 @@ namespace sephp
         public override void OnFrameworkInitializationCompleted()
         {
             RegisterMyServices();
+            RegisterConfig();
             RegisterMyAddons();
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -32,6 +35,13 @@ namespace sephp
         }
 
         protected void RegisterMyServices()
+        {
+            Locator.CurrentMutable.RegisterLazySingleton<ProcessService>(
+                () => new ProcessService()
+            );
+        }
+
+        protected void RegisterConfig()
         {
             ConfigService.RegisterConfig<AppSettings>("Config/sephp.yaml");
         }
