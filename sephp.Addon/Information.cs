@@ -14,7 +14,7 @@ namespace sephp.Addon
 
         public string? Description { get; set; }
 
-        public Uri? Uri { get; set; }
+        public string? Website { get; set; }
 
         public Version? Version { get; set; } = new Version(1, 0, 0);
     }

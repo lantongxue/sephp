@@ -17,8 +17,8 @@ namespace sephp
 
         public override void OnFrameworkInitializationCompleted()
         {
-
             RegisterMyServices();
+            RegisterMyAddons();
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
@@ -36,5 +36,9 @@ namespace sephp
             ConfigService.RegisterConfig<AppSettings>("Config/sephp.yaml");
         }
 
+        protected void RegisterMyAddons()
+        {
+            sephp.Nginx.MyAddon.Bootstrap();
+        }
     }
 }
