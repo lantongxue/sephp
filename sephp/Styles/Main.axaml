@@ -34,4 +34,13 @@
 	<DataTemplate x:Key="GeometryDataTemplate" DataType="Geometry">
 		<PathIcon Theme="{StaticResource InnerPathIcon}" Data="{Binding}" />
 	</DataTemplate>
+
+	<ControlTheme x:Key="IconButton"
+                  BasedOn="{StaticResource BorderlessButton}"
+                  TargetType="Button">
+		<Setter Property="Padding" Value="{StaticResource SemiThicknessTight}" />
+		<Setter Property="Width" Value="{StaticResource SemiSpacingExtraLoose}" />
+		<Setter Property="Height" Value="{StaticResource SemiSpacingExtraLoose}" />
+		<Setter Property="Foreground" Value="{DynamicResource SemiColorText1}" />
+	</ControlTheme>
 </ResourceDictionary>

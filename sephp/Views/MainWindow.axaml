@@ -49,7 +49,7 @@
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 					<Button
-						Theme="{DynamicResource IconBorderlessButton}"
+						Theme="{DynamicResource IconButton}"
 						Content="{StaticResource SemiIconFilledArrowDown}"
 						ToolTip.Tip="{x:Static lang:Resource.BackgroundTask}">
 						<Button.Flyout>
@@ -84,8 +84,9 @@
 						OffContent="{StaticResource SemiIconSun}" 
 						ToolTip.Tip="{x:Static lang:Resource.SwitchDarkOrLightMode}"/>
 					<Button
-						Theme="{DynamicResource IconBorderlessButton}"
-						Content="{StaticResource SemiIconMenu}">
+						Theme="{DynamicResource IconButton}"
+						Content="{StaticResource IconTheme}"
+						ToolTip.Tip="{x:Static lang:Resource.Theme}">
 							<Button.Flyout>
 								<MenuFlyout Placement="Bottom" ItemsSource="{Binding MenuItems}" />
 							</Button.Flyout>
@@ -99,9 +100,9 @@
 							</Button.Styles>
 					</Button>
 					<Button
-						Theme="{DynamicResource IconBorderlessButton}"
+						Theme="{DynamicResource IconButton}"
 						Command="{Binding OpenRepoUrl}"
-						Content="{StaticResource SemiIconGithubLogo}"
+						Content="{StaticResource IconGithub}"
 						ToolTip.Tip="{x:Static lang:Resource.RepoName}"/>
 				</StackPanel>
 			</Panel>

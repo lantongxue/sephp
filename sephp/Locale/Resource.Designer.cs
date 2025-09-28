@@ -187,6 +187,15 @@ namespace sephp.Locale {
         }
         
         /// <summary>
+        ///   查找类似 Theme 的本地化字符串。
+        /// </summary>
+        public static string Theme {
+            get {
+                return ResourceManager.GetString("Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Website 的本地化字符串。
         /// </summary>
         public static string Website {

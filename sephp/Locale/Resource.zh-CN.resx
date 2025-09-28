@@ -159,6 +159,9 @@
   <data name="SwitchDarkOrLightMode" xml:space="preserve">
     <value>切换暗/明模式</value>
   </data>
+  <data name="Theme" xml:space="preserve">
+    <value>主题</value>
+  </data>
   <data name="Website" xml:space="preserve">
     <value>网站管理</value>
   </data>

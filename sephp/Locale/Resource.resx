@@ -159,6 +159,9 @@
   <data name="SwitchDarkOrLightMode" xml:space="preserve">
     <value>Switch Dark/Light mode</value>
   </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
   <data name="Website" xml:space="preserve">
     <value>Website</value>
   </data>
