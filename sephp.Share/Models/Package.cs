@@ -3,13 +3,13 @@ using System.IO;
 using System.Runtime.InteropServices;
 using YamlDotNet.Serialization;
 
-namespace sephp.Models;
+namespace sephp.Share.Models;
 
 public class Package
 {
-    public string Id { get; set; }
-    
-    public string Version { get; set; }
+    public string Id { get; set; } = "";
+
+    public string Version { get; set; } = "";
 
     [YamlIgnore]
     public string Directory => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Packages", Id, Version);
@@ -38,10 +38,9 @@ public class Package
         }
     }
 
-    public Version GetVersion()
-    {
-        return new Version(Version);
-    }
+    [YamlIgnore]
+    public PackageProcess? Process {  get; set; }
+
 }
 
 public class PackageBinrary

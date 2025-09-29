@@ -14,10 +14,10 @@
 		<Border Grid.Row="0" Theme="{StaticResource CardBorder}">
 			<WrapPanel ItemSpacing="10">
 				<StackPanel Orientation="Horizontal" Spacing="10">
-					<Button Classes="Success" Content="启动" IsEnabled="{Binding !IsRunning}" Click="Button_Click" />
-					<Button Classes="Danger" Content="停止" IsEnabled="{Binding IsRunning}" />
-					<Button Classes="Warning" Content="重启" />
-					<Button Classes="Secondary" IsEnabled="{Binding IsRunning}" Content="重载配置" />
+					<Button Classes="Success" Content="启动" IsEnabled="{Binding !NginxProcess.IsRunning}" Click="Button_Click" />
+					<Button Classes="Danger" Content="停止" Command="{Binding StopCommand}" IsEnabled="{Binding NginxProcess.IsRunning}" />
+					<Button Classes="Warning" Content="重启" Command="{Binding RestartCommand}" />
+					<Button Classes="Secondary" IsEnabled="{Binding NginxProcess.IsRunning}" Content="重载配置" />
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<PathIcon

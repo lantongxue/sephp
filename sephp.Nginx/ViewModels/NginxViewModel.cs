@@ -2,6 +2,7 @@
 using ReactiveUI.SourceGenerators;
 using sephp.Nginx.Locale;
 using sephp.Nginx.Models;
+using sephp.Share.Models;
 using sephp.Share.Services;
 using sephp.Share.Services.Interfaces;
 using Splat;
@@ -20,7 +21,7 @@ namespace sephp.Nginx.ViewModels
         public IScreen HostScreen { get; }
 
         [Reactive]
-        private bool _isRunning = false;
+        private PackageProcess? _nginxProcess;
 
         private readonly IConfigService<NginxSettings> _config;
         public NginxSettings Settings => _config.Settings;
@@ -36,18 +37,42 @@ namespace sephp.Nginx.ViewModels
             _config.OnChanged += _ => this.RaisePropertyChanged(nameof(Settings));
 
             processService = Locator.Current.GetService<ProcessService>()!;
+
+            NginxProcess = processService.FindProcessById(_config.Settings.Pid);
+
+            this.WhenAnyValue(x => x.NginxProcess.IsRunning)
+                .Subscribe(running =>
+                {
+                    var pid = running ? NginxProcess.GetPid() : 0;
+                    _config.Settings.Pid = pid;
+                    _config.Save();
+                });
+
         }
 
         public async Task Start()
         {
-            await Task.Run(() =>
-            {
-                var p = processService.Start("cmd");
-                _config.Settings.Pid = p.Id;
-                _config.Save();
-                IsRunning = true;
-            });
+            NginxProcess = processService.Create("cmd");
+            await NginxProcess.Start();
             
+        }
+
+        [ReactiveCommand]
+        private void Stop()
+        {
+            if(NginxProcess != null)
+            {
+                NginxProcess.KillProcess();
+            }
+        }
+
+        [ReactiveCommand]
+        private async Task Restart()
+        {
+            if (NginxProcess != null)
+            {
+                await NginxProcess.Restart();
+            }
         }
     }
 }

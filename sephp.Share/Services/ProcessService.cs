@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sephp.Share.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,14 +10,15 @@ namespace sephp.Share.Services
 {
     public class ProcessService
     {
-        public Process Start(string executor, params string[] args)
+        public PackageProcess Create(string executor, params string[] args)
         {
-            Process process = new Process();
-            process.StartInfo = new ProcessStartInfo(executor, args);
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.CreateNoWindow = true;
-            process.Start();
+            PackageProcess process = new PackageProcess(executor, args);
             return process;
+        }
+
+        public PackageProcess? FindProcessById(int id)
+        {
+            return PackageProcess.FindProcessById(id);
         }
     }
 }
