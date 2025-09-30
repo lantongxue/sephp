@@ -21,7 +21,7 @@ namespace sephp.Nginx.ViewModels
         public IScreen HostScreen { get; }
 
         [Reactive]
-        private PackageProcess? _nginxProcess;
+        private PackageProcess _nginxProcess;
 
         private readonly IConfigService<NginxSettings> _config;
         public NginxSettings Settings => _config.Settings;

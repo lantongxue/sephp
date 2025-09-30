@@ -7,7 +7,7 @@ namespace sephp.Share.Models
 {
     public class PackageProcess : ReactiveObject, IDisposable
     {
-        private readonly Process process;
+        private Process? process;
 
         private bool isRunning;
         public bool IsRunning
@@ -36,8 +36,16 @@ namespace sephp.Share.Models
             process = p;
         }
 
+        public PackageProcess()
+        {
+        }
+
         public async Task<bool> Start()
         {
+            if (process == null)
+            {
+                return false;
+            }
             await Task.Run(() =>
             {
                 IsRunning = process.Start();
@@ -48,6 +56,10 @@ namespace sephp.Share.Models
 
         public void KillProcess()
         {
+            if (process == null)
+            {
+                return;
+            }
             if (IsRunning && !process.HasExited)
             {
                 process.Kill();
@@ -64,10 +76,14 @@ namespace sephp.Share.Models
 
         public int GetPid()
         {
+            if (process == null)
+            {
+                return 0;
+            }
             return process.Id;
         }
 
-        public static PackageProcess? FindProcessById(int id)
+        public static PackageProcess FindProcessById(int id)
         {
             try
             {
@@ -79,7 +95,10 @@ namespace sephp.Share.Models
             }
             catch
             {
-                return null;
+                return new PackageProcess()
+                {
+                    IsRunning = false
+                };
             }
         }
 

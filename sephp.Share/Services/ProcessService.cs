@@ -16,7 +16,7 @@ namespace sephp.Share.Services
             return process;
         }
 
-        public PackageProcess? FindProcessById(int id)
+        public PackageProcess FindProcessById(int id)
         {
             return PackageProcess.FindProcessById(id);
         }

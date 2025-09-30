@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sephp.Share.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,12 @@ namespace sephp.Nginx.Models
         public string? Version { get; set; }
 
         public int Pid {  get; set; }
+
+        public PlatformBinrary PlatformBinrary { get; set; } = new PlatformBinrary()
+        {
+            Windows = "nginx.exe",
+            Linux = "nginx",
+            Darwin = "nginx"
+        };
     }
 }

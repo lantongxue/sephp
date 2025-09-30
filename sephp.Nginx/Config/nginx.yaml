@@ -1,2 +1,6 @@
 ﻿version: "1.28.0"
 pid: 0
+platformBinrary:
+  windows: "nginx.exe"
+  linux: "nginx"
+  darwin: "nginx"

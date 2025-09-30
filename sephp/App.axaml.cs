@@ -39,6 +39,9 @@ namespace sephp
             Locator.CurrentMutable.RegisterLazySingleton<ProcessService>(
                 () => new ProcessService()
             );
+            Locator.CurrentMutable.RegisterLazySingleton<PackageService>(
+                () => new PackageService()
+            );
         }
 
         protected void RegisterConfig()

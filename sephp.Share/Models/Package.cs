@@ -7,47 +7,50 @@ namespace sephp.Share.Models;
 
 public class Package
 {
-    public string Id { get; set; } = "";
+    public virtual string Id { get; set; }
 
-    public string Version { get; set; } = "";
+    public virtual string Version { get; set; }
 
     [YamlIgnore]
-    public string Directory => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Packages", Id, Version);
+    public static string Directory => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Packages");
     
-    public PackageBinrary BinraryDirectory { get; set; }
+    public PlatformBinrary? PlatformBinrary { get; set; }
 
     [YamlIgnore]
     public string Executor
     {
         get
         {
+            if(PlatformBinrary == null)
+            {
+                return "";
+            }
             string executor = "";
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                executor = BinraryDirectory.Windows;
+                executor = PlatformBinrary.Windows;
             }
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                executor = BinraryDirectory.Linux;
+                executor = PlatformBinrary.Linux;
             }
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                executor = BinraryDirectory.Darwin;
+                executor = PlatformBinrary.Darwin;
             }
             return Path.Combine(Directory, executor);
         }
     }
 
     [YamlIgnore]
-    public PackageProcess? Process {  get; set; }
-
+    public PackageProcess Process {  get; set; } = new PackageProcess();
 }
 
-public class PackageBinrary
+public class PlatformBinrary
 {
-    public string Windows { get; set; }
+    public string Windows { get; set; } = "";
 
-    public string Linux { get; set; }
+    public string Linux { get; set; } = "";
 
-    public string Darwin { get; set; }
+    public string Darwin { get; set; } = "";
 }
