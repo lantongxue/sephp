@@ -20,13 +20,11 @@ namespace sephp.Nginx.ViewModels
 
         public IScreen HostScreen { get; }
 
-        [Reactive]
-        private PackageProcess _nginxProcess;
-
         private readonly IConfigService<NginxSettings> _config;
         public NginxSettings Settings => _config.Settings;
 
-        private readonly ProcessService processService;
+        [Reactive]
+        private NginxPackage _package;
 
         public NginxViewModel(IScreen screen)
         {
@@ -36,14 +34,17 @@ namespace sephp.Nginx.ViewModels
 
             _config.OnChanged += _ => this.RaisePropertyChanged(nameof(Settings));
 
-            processService = Locator.Current.GetService<ProcessService>()!;
+            Package = new NginxPackage()
+            {
+                Version = _config.Settings.Version,
+                PlatformBinrary = _config.Settings.PlatformBinrary,
+                Process = PackageProcess.FindProcessById(_config.Settings.Pid)
+            };
 
-            NginxProcess = processService.FindProcessById(_config.Settings.Pid);
-
-            this.WhenAnyValue(x => x.NginxProcess.IsRunning)
+            this.WhenAnyValue(x => x.Package.Process.IsRunning)
                 .Subscribe(running =>
                 {
-                    var pid = running ? NginxProcess.GetPid() : 0;
+                    var pid = running ? Package.Process.GetPid() : 0;
                     _config.Settings.Pid = pid;
                     _config.Save();
                 });
@@ -52,27 +53,19 @@ namespace sephp.Nginx.ViewModels
 
         public async Task Start()
         {
-            NginxProcess = processService.Create("cmd");
-            await NginxProcess.Start();
-            
+            await Package.Process.Start();
         }
 
         [ReactiveCommand]
         private void Stop()
         {
-            if(NginxProcess != null)
-            {
-                NginxProcess.KillProcess();
-            }
+            
         }
 
         [ReactiveCommand]
         private async Task Restart()
         {
-            if (NginxProcess != null)
-            {
-                await NginxProcess.Restart();
-            }
+            
         }
     }
 }

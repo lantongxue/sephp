@@ -10,5 +10,6 @@ namespace sephp.Nginx.Models
     public class NginxPackage : Package
     {
         public override string Id { get; set; } = "nginx";
+
     }
 }

@@ -9,7 +9,7 @@ namespace sephp.Nginx.Models
 {
     public class NginxSettings
     {
-        public string? Version { get; set; }
+        public string Version { get; set; }
 
         public int Pid {  get; set; }
 

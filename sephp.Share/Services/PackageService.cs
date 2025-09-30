@@ -10,24 +10,16 @@ namespace sephp.Share.Services
 {
     public class PackageService
     {
-        public string GetPackageDirectory()
-        {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Packages");
-        }
 
-        public Package? FindPackage(string id, Version version)
+        public T? FindPackage<T>(string id, Version version) where T : new()
         {
             string packageDir = Path.Combine(Package.Directory, id, version.ToString());
             if (!Directory.Exists(packageDir))
             {
-                return null;
+                //return default(T);
             }
 
-            Package package = new Package()
-            {
-                Id = id,
-                Version = version.ToString()
-            };
+            var package = new T();
 
             return package;
         }

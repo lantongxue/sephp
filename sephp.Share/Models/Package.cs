@@ -43,7 +43,7 @@ public class Package
     }
 
     [YamlIgnore]
-    public PackageProcess Process {  get; set; } = new PackageProcess();
+    public PackageProcess Process {  get; set; }
 }
 
 public class PlatformBinrary
