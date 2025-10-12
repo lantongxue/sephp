@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using sephp.Locale;
+using sephp.Share.Locale;
 using System;
 using System.Collections.Generic;
 using System.Linq;

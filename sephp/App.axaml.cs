@@ -3,7 +3,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using sephp.Models;
 using sephp.Share.Services;
-using sephp.Share.Services.Interfaces;
 using sephp.ViewModels;
 using sephp.Views;
 using Splat;
@@ -36,9 +35,6 @@ namespace sephp
 
         protected void RegisterMyServices()
         {
-            Locator.CurrentMutable.RegisterLazySingleton<ProcessService>(
-                () => new ProcessService()
-            );
             Locator.CurrentMutable.RegisterLazySingleton<PackageService>(
                 () => new PackageService()
             );

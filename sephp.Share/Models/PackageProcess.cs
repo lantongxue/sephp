@@ -1,6 +1,5 @@
 ﻿using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace sephp.Share.Models
@@ -13,48 +12,78 @@ namespace sephp.Share.Models
         public bool IsRunning
         {
             get => isRunning;
-            private set => this.RaiseAndSetIfChanged(ref isRunning, value);
+            set => this.RaiseAndSetIfChanged(ref isRunning, value);
         }
 
-        public PackageProcess(string executor, IEnumerable<string> args)
-        {
-            process = new Process
-            {
-                StartInfo = new ProcessStartInfo(executor, args)
-                {
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                },
-                EnableRaisingEvents = true
-            };
+        public ProcessStartInfo StartInfo;
 
-            process.Exited += (_, __) => IsRunning = false;
+        public PackageProcess(ProcessStartInfo info)
+        {
+            StartInfo = info;
         }
 
-        public PackageProcess(Process p)
+        public PackageProcess(Process p, ProcessStartInfo info)
         {
+            StartInfo = info;
+            p.Refresh();
             process = p;
         }
 
-        public PackageProcess()
+        public Process StartProcess(params string[] args)
         {
-        }
-
-        public async Task<bool> Start()
-        {
-            if (process == null)
+            if (args.Length > 0)
             {
-                return false;
+                foreach (string arg in args)
+                {
+                    StartInfo.ArgumentList.Add(arg);
+                }
             }
-            await Task.Run(() =>
-            {
-                IsRunning = process.Start();
-            });
 
-            return IsRunning;
+            Process p = new Process()
+            {
+                StartInfo = StartInfo
+            };
+
+            p.EnableRaisingEvents = true;
+            p.OutputDataReceived += (sender, e) =>
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                {
+                    Debug.WriteLine($"[Output] {e.Data}");
+                }
+            };
+            p.ErrorDataReceived += (sender, e) =>
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                {
+                    Debug.WriteLine($"[Error] {e.Data}");
+                }
+            };
+            p.Exited += (_, __) =>
+            {
+                IsRunning = false;
+            };
+            p.Start();
+            p.BeginOutputReadLine();
+            p.BeginErrorReadLine();
+            return p;
         }
 
-        public void KillProcess()
+        public async Task<bool> Start(params string[] args)
+        {
+            if(process != null)
+            {
+                Stop();
+            }
+            return await Task.Run<bool>(() =>
+            {
+                process = StartProcess(args);
+                IsRunning = !process.HasExited;
+                return IsRunning;
+            });
+        }
+
+        public void Stop()
         {
             if (process == null)
             {
@@ -62,14 +91,16 @@ namespace sephp.Share.Models
             }
             if (IsRunning && !process.HasExited)
             {
-                process.Kill();
+                process.Kill(true);
+                process.WaitForExit();
                 IsRunning = false;
+                process = null;
             }
         }
 
         public async Task Restart()
         {
-            KillProcess();
+            Stop();
             await Task.Delay(1000);
             await Start();
         }
@@ -83,19 +114,19 @@ namespace sephp.Share.Models
             return process.Id;
         }
 
-        public static PackageProcess FindProcessById(int id)
+        public static PackageProcess FindProcessById(int id, ProcessStartInfo info)
         {
             try
             {
-                var p = Process.GetProcessById(id);
-                return new PackageProcess(p)
+                Process p = Process.GetProcessById(id);
+                return new PackageProcess(p, info)
                 {
                     IsRunning = !p.HasExited
                 };
             }
             catch
             {
-                return new PackageProcess()
+                return new PackageProcess(info)
                 {
                     IsRunning = false
                 };

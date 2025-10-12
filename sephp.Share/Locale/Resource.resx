@@ -120,6 +120,15 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="AddToQuickLaunch" xml:space="preserve">
+    <value>Add to Quick Launch</value>
+  </data>
+  <data name="AddToSystemPath" xml:space="preserve">
+    <value>Add to System PATH</value>
+  </data>
+  <data name="AddToSystemPathTips" xml:space="preserve">
+    <value>Once added, it will take effect permanently</value>
+  </data>
   <data name="Apache" xml:space="preserve">
     <value>Apache</value>
   </data>
@@ -144,17 +153,32 @@
   <data name="PHP" xml:space="preserve">
     <value>PHP</value>
   </data>
+  <data name="AddQuickLaunchTips" xml:space="preserve">
+    <value>One‑click quick launch on the overview page</value>
+  </data>
   <data name="Redis" xml:space="preserve">
     <value>Redis</value>
   </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Reload</value>
+  </data>
   <data name="RepoName" xml:space="preserve">
     <value>GitHub</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Restart</value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>Setting</value>
   </data>
   <data name="Setting_Other" xml:space="preserve">
     <value>Other</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
   </data>
   <data name="SwitchDarkOrLightMode" xml:space="preserve">
     <value>Switch Dark/Light mode</value>

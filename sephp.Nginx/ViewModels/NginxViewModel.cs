@@ -8,6 +8,7 @@ using sephp.Share.Services.Interfaces;
 using Splat;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,35 +38,43 @@ namespace sephp.Nginx.ViewModels
             Package = new NginxPackage()
             {
                 Version = _config.Settings.Version,
-                PlatformBinrary = _config.Settings.PlatformBinrary,
-                Process = PackageProcess.FindProcessById(_config.Settings.Pid)
+                PlatformBinrary = _config.Settings.PlatformBinrary
             };
 
-            this.WhenAnyValue(x => x.Package.Process.IsRunning)
+            Package.Init(_config.Settings.Pid);
+
+            this.WhenAnyValue(x => x.Package.Process!.IsRunning)
                 .Subscribe(running =>
                 {
-                    var pid = running ? Package.Process.GetPid() : 0;
+                    var pid = running ? Package.Process!.GetPid() : 0;
                     _config.Settings.Pid = pid;
                     _config.Save();
                 });
 
         }
 
-        public async Task Start()
+        [ReactiveCommand]
+        private async Task Start()
         {
-            await Package.Process.Start();
+            await Package.Start();
         }
 
         [ReactiveCommand]
         private void Stop()
         {
-            
+            Package.Stop();
         }
 
         [ReactiveCommand]
         private async Task Restart()
         {
-            
+            await Package.Restart();
+        }
+
+        [ReactiveCommand]
+        private async Task Reload()
+        {
+            await Package.Reload();
         }
     }
 }

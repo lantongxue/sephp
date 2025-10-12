@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace sephp.Locale {
+namespace sephp.Share.Locale {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace sephp.Locale {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("sephp.Locale.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("sephp.Share.Locale.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,6 +66,42 @@ namespace sephp.Locale {
         public static string About {
             get {
                 return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 One‑click quick launch on the overview page 的本地化字符串。
+        /// </summary>
+        public static string AddQuickLaunchTips {
+            get {
+                return ResourceManager.GetString("AddQuickLaunchTips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Add to Quick Launch 的本地化字符串。
+        /// </summary>
+        public static string AddToQuickLaunch {
+            get {
+                return ResourceManager.GetString("AddToQuickLaunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Add to System PATH 的本地化字符串。
+        /// </summary>
+        public static string AddToSystemPath {
+            get {
+                return ResourceManager.GetString("AddToSystemPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Once added, it will take effect permanently 的本地化字符串。
+        /// </summary>
+        public static string AddToSystemPathTips {
+            get {
+                return ResourceManager.GetString("AddToSystemPathTips", resourceCulture);
             }
         }
         
@@ -151,11 +187,29 @@ namespace sephp.Locale {
         }
         
         /// <summary>
+        ///   查找类似 Reload 的本地化字符串。
+        /// </summary>
+        public static string Reload {
+            get {
+                return ResourceManager.GetString("Reload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 GitHub 的本地化字符串。
         /// </summary>
         public static string RepoName {
             get {
                 return ResourceManager.GetString("RepoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Restart 的本地化字符串。
+        /// </summary>
+        public static string Restart {
+            get {
+                return ResourceManager.GetString("Restart", resourceCulture);
             }
         }
         
@@ -174,6 +228,24 @@ namespace sephp.Locale {
         public static string Setting_Other {
             get {
                 return ResourceManager.GetString("Setting_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Start 的本地化字符串。
+        /// </summary>
+        public static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Stop 的本地化字符串。
+        /// </summary>
+        public static string Stop {
+            get {
+                return ResourceManager.GetString("Stop", resourceCulture);
             }
         }
         

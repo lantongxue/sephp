@@ -5,6 +5,7 @@
 			 xmlns:vm="using:sephp.Nginx.ViewModels"
 			 x:DataType="vm:NginxViewModel"
              x:Class="sephp.Nginx.Views.NginxView"
+			 xmlns:lang="using:sephp.Share.Locale"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Margin="10">
 	<Grid>
 		<Grid.RowDefinitions>
@@ -14,18 +15,37 @@
 		<Border Grid.Row="0" Theme="{StaticResource CardBorder}">
 			<WrapPanel ItemSpacing="10">
 				<StackPanel Orientation="Horizontal" Spacing="10">
-					<Button Classes="Success" Content="启动" IsEnabled="{Binding !Package.Process.IsRunning}" Click="Button_Click" />
-					<Button Classes="Danger" Content="停止" Command="{Binding StopCommand}" IsEnabled="{Binding Package.Process.IsRunning}" />
-					<Button Classes="Warning" Content="重启" Command="{Binding RestartCommand}" />
-					<Button Classes="Secondary" IsEnabled="{Binding Package.Process.IsRunning}" Content="重载配置" />
+					<Button 
+						Classes="Success" 
+						Content="{x:Static lang:Resource.Start}" 
+						Command="{Binding StartCommand}" 
+						IsEnabled="{Binding !Package.Process.IsRunning}" 
+						Click="NginxButton_Click" />
+					<Button 
+						Classes="Danger" 
+						Content="{x:Static lang:Resource.Stop}" 
+						Command="{Binding StopCommand}" 
+						IsEnabled="{Binding Package.Process.IsRunning}" 
+						Click="NginxButton_Click" />
+					<Button 
+						Classes="Warning" 
+						Content="{x:Static lang:Resource.Restart}" 
+						Command="{Binding RestartCommand}" 
+						Click="NginxButton_Click" />
+					<Button 
+						Classes="Secondary" 
+						Content="{x:Static lang:Resource.Reload}" 
+						Command="{Binding ReloadCommand}" 
+						IsEnabled="{Binding Package.Process.IsRunning}" 
+						Click="NginxButton_Click" />
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<PathIcon
                         Theme="{DynamicResource InnerPathIcon}"
 						Margin="0,0,2,0"
 						Data="{StaticResource SemiIconAlertCircle}"
-						ToolTip.Tip="可以在首页一键快速启动"/>
-					<TextBlock Margin="0,0,5,0" Text="加入快速启动组" VerticalAlignment="Center" />
+						ToolTip.Tip="{x:Static lang:Resource.AddQuickLaunchTips}"/>
+					<TextBlock Margin="0,0,5,0" Text="{x:Static lang:Resource.AddToQuickLaunch}" VerticalAlignment="Center" />
 					<ToggleSwitch Theme="{StaticResource SimpleToggleSwitch}" />
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
@@ -33,8 +53,8 @@
                         Theme="{DynamicResource InnerPathIcon}"
 						Margin="0,0,2,0"
 						Data="{StaticResource SemiIconAlertCircle}"
-						ToolTip.Tip="加入后永久生效"/>
-					<TextBlock Margin="0,0,5,0" Text="加入系统环境变量" VerticalAlignment="Center" />
+						ToolTip.Tip="{x:Static lang:Resource.AddToSystemPathTips}"/>
+					<TextBlock Margin="0,0,5,0" Text="{x:Static lang:Resource.AddToSystemPath}" VerticalAlignment="Center" />
 					<ToggleSwitch Theme="{StaticResource SimpleToggleSwitch}" />
 				</StackPanel>
 			</WrapPanel>
