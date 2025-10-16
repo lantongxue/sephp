@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using sephp.Nginx.Parser.NginxConfig;
 
 namespace sephp.Nginx.ViewModels
 {
@@ -50,6 +51,8 @@ namespace sephp.Nginx.ViewModels
                     _config.Settings.Pid = pid;
                     _config.Save();
                 });
+            var config = ConfigParser.Parse(Path.Combine(Package.PackageDirectory, "conf", "nginx.conf"));
+            Debug.WriteLine(config.ToString());
 
         }
 
