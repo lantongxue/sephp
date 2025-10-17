@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ReactiveUI" Version="20.1.1" />
-    <PackageReference Include="Splat" Version="15.1.1" />
+    <PackageReference Include="ReactiveUI" Version="22.1.1" />
+    <PackageReference Include="Splat" Version="17.1.1" />
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
   </ItemGroup>
 

@@ -3,6 +3,19 @@ namespace sephp.Nginx.Parser.NginxConfig;
 public class ConfigBlock
 {
     public List<ConfigStatement> Statements { get; } = new();
+
+    public ConfigDirective? Find(string name)
+    {
+        var stmt = Statements.Where(stmt => {
+            if(stmt is ConfigDirective)
+            {
+                var d = (ConfigDirective)stmt;
+                return d.Name == name;
+            }
+            return false;
+        }).FirstOrDefault();
+        return (ConfigDirective?)stmt;
+    }
     
     public string ToString(bool debug = false)
     {

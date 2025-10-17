@@ -1,6 +1,6 @@
 ﻿using System;
-using Avalonia;
-using Avalonia.ReactiveUI;
+using Avalonia; // AppBuilder
+using ReactiveUI.Avalonia; // UseReactiveUI, RegisterReactiveUIViews* (core)
 
 namespace sephp
 {

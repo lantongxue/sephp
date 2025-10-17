@@ -52,7 +52,7 @@ namespace sephp.Nginx.ViewModels
                     _config.Save();
                 });
             var config = ConfigParser.Parse(Path.Combine(Package.PackageDirectory, "conf", "nginx.conf"));
-            Debug.WriteLine(config.ToString());
+            File.WriteAllText(Path.Combine(Package.PackageDirectory, "conf", "aa.conf"), config.ToString());
 
         }
 

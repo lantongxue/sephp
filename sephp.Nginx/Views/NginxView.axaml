@@ -70,6 +70,16 @@
 			<TabItem Padding="10" Header="版本管理">
 				
 			</TabItem>
+			<TabItem Padding="10" Header="AccessLog">
+				<Grid>
+					
+				</Grid>
+			</TabItem>
+			<TabItem Padding="10" Header="ErrorLog">
+				<Grid>
+					
+				</Grid>
+			</TabItem>
 		</TabControl>
 	</Grid>
 </UserControl>
