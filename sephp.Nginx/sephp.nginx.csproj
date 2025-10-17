@@ -8,11 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.3.7" />
+    <PackageReference Include="AvaloniaEdit.TextMate" Version="11.3.0" />
     <PackageReference Include="ReactiveUI.Avalonia" Version="11.3.0" />
     <PackageReference Include="ReactiveUI.SourceGenerators" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Semi.Avalonia.AvaloniaEdit" Version="11.2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +35,12 @@
 
   <ItemGroup>
     <None Update="Config\nginx.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Highlight\nginx-log.tmLanguage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Highlight\nginx.tmLanguage.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Views\NginxView.axaml">

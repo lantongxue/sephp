@@ -2,11 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:semi="https://irihi.tech/semi"
+			 xmlns:AvaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
 			 xmlns:vm="using:sephp.Nginx.ViewModels"
 			 x:DataType="vm:NginxViewModel"
              x:Class="sephp.Nginx.Views.NginxView"
 			 xmlns:lang="using:sephp.Share.Locale"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Margin="10">
+	<UserControl.Styles>
+		<semi:AvaloniaEditSemiTheme />
+	</UserControl.Styles>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -71,9 +76,11 @@
 				
 			</TabItem>
 			<TabItem Padding="10" Header="AccessLog">
-				<Grid>
-					
-				</Grid>
+				<AvaloniaEdit:TextEditor x:Name="AccessLogEditor"
+							Document="{Binding AccessLogs}"
+							IsReadOnly="True"
+							ShowLineNumbers="True"
+							FontFamily="Cascadia Code,Consolas,Menlo,Monospace" />
 			</TabItem>
 			<TabItem Padding="10" Header="ErrorLog">
 				<Grid>

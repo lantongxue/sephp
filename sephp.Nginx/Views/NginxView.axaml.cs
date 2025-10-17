@@ -1,13 +1,16 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using ReactiveUI.Avalonia;
 using Avalonia.Threading;
+using AvaloniaEdit;
+using AvaloniaEdit.TextMate;
 using DynamicData.Binding;
 using ReactiveUI;
+using ReactiveUI.Avalonia;
 using sephp.Nginx.ViewModels;
 using System.Reactive;
 using System.Reactive.Linq;
+using TextMateSharp.Grammars;
 
 namespace sephp.Nginx.Views;
 
@@ -16,6 +19,8 @@ public partial class NginxView : ReactiveUserControl<NginxViewModel>
     public NginxView()
     {
         InitializeComponent();
+
+        EditorInit();
     }
 
     private async void NginxButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -34,5 +39,14 @@ public partial class NginxView : ReactiveUserControl<NginxViewModel>
         }
 
         btn.Classes.Remove("Loading");
+    }
+
+    protected void EditorInit()
+    {
+        var AccessLogEditor = this.FindControl<TextEditor>("AccessLogEditor");
+        var registryOptions = new RegistryOptions(ThemeName.DarkPlus);
+        var textMateInstallation = AccessLogEditor.InstallTextMate(registryOptions);
+
+        textMateInstallation.SetGrammarFile("Highlight/nginx-log.tmLanguage.json");
     }
 }
