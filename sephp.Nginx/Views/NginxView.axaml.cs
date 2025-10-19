@@ -47,6 +47,6 @@ public partial class NginxView : ReactiveUserControl<NginxViewModel>
         var registryOptions = new RegistryOptions(ThemeName.DarkPlus);
         var textMateInstallation = AccessLogEditor.InstallTextMate(registryOptions);
 
-        textMateInstallation.SetGrammarFile("Highlight/nginx-log.tmLanguage.json");
+        textMateInstallation.SetGrammarFile("Highlight/nginx.tmLanguage.json");
     }
 }
