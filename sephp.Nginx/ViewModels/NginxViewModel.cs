@@ -12,7 +12,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using sephp.Nginx.Parser.NginxConfig;
 using AvaloniaEdit.Document;
 
 namespace sephp.Nginx.ViewModels
@@ -30,7 +29,7 @@ namespace sephp.Nginx.ViewModels
         private NginxPackage _package;
 
         [Reactive]
-        private TextDocument _accessLogs;
+        private TextDocument _errorLogDocument;
 
         public NginxViewModel(IScreen screen)
         {
@@ -55,16 +54,11 @@ namespace sephp.Nginx.ViewModels
                     _config.Settings.Pid = pid;
                     _config.Save();
                 });
-            var config = ConfigParser.Parse(Path.Combine(Package.PackageDirectory, "conf", "nginx.conf"));
-            File.WriteAllText(Path.Combine(Package.PackageDirectory, "conf", "aa.conf"), config.ToString());
-
-            
-
-            using (var reader = File.OpenText(Path.Combine(Package.PackageDirectory, "logs", "access.log")))
+            Package.GetAccessLog("localhost");
+            using (var reader = File.OpenText(Package.GetErrorLog()))
             {
-                AccessLogs = new TextDocument();
                 ITextSource source = new StringTextSource(reader.ReadToEnd());
-                AccessLogs = new TextDocument(source);
+                ErrorLogDocument = new TextDocument(source);
             }
 
         }

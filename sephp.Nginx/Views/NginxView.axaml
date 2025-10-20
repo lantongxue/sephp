@@ -75,17 +75,12 @@
 			<TabItem Padding="10" Header="版本管理">
 				
 			</TabItem>
-			<TabItem Padding="10" Header="AccessLog">
-				<AvaloniaEdit:TextEditor x:Name="AccessLogEditor"
-							Document="{Binding AccessLogs}"
+			<TabItem Padding="10" Header="ErrorLog">
+				<AvaloniaEdit:TextEditor x:Name="ErrorLogEditor"
+							Document="{Binding ErrorLogDocument}"
 							IsReadOnly="True"
 							ShowLineNumbers="True"
 							FontFamily="Cascadia Code,Consolas,Menlo,Monospace" />
-			</TabItem>
-			<TabItem Padding="10" Header="ErrorLog">
-				<Grid>
-					
-				</Grid>
 			</TabItem>
 		</TabControl>
 	</Grid>

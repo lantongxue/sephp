@@ -43,10 +43,10 @@ public partial class NginxView : ReactiveUserControl<NginxViewModel>
 
     protected void EditorInit()
     {
-        var AccessLogEditor = this.FindControl<TextEditor>("AccessLogEditor");
-        var registryOptions = new RegistryOptions(ThemeName.DarkPlus);
-        var textMateInstallation = AccessLogEditor.InstallTextMate(registryOptions);
+        //var AccessLogEditor = this.FindControl<TextEditor>("AccessLogEditor");
+        //var registryOptions = new RegistryOptions(ThemeName.DarkPlus);
+        //var textMateInstallation = AccessLogEditor.InstallTextMate(registryOptions);
 
-        textMateInstallation.SetGrammarFile("Highlight/nginx.tmLanguage.json");
+        //textMateInstallation.SetGrammarFile("Highlight/nginx.tmLanguage.json");
     }
 }

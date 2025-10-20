@@ -1,3 +1,4 @@
+using sephp.Nginx.Parser.NginxConfig.Directive;
 using System.Text.RegularExpressions;
 
 namespace sephp.Nginx.Parser.NginxConfig;
@@ -39,17 +40,27 @@ public static class ConfigParser
                 stack.Pop(); // 回到上一级 block
                 continue;
             }
-            
-            var stmt = new ConfigDirective();
-            currentBlock.Statements.Add(stmt);
 
             var arr = Regex.Split(text, @"\s+");
 
             string[] args = new string[arr.Length - 1];
             Array.Copy(arr, 1, args, 0, args.Length);
 
+            ConfigDirective stmt;
+            switch (arr[0])
+            {
+                case "server":
+                    stmt = new ServerDirective();
+                    break;
+                default:
+                    stmt = new ConfigDirective();
+                    break;
+            }
+            
             stmt.Name = arr[0];
             stmt.Args.AddRange(args);
+
+            currentBlock.Statements.Add(stmt);
 
             if (isBlock)
             {
