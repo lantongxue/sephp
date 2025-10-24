@@ -1,4 +1,3 @@
-using sephp.Nginx.Parser.NginxConfig.Directive;
 
 namespace sephp.Nginx.Parser.NginxConfig;
 
@@ -8,20 +7,12 @@ public class ConfigBlock
 
     public ConfigDirective? Find(string name)
     {
-        var stmt = Statements.Where(stmt => {
-            if(stmt is ConfigDirective)
-            {
-                var d = (ConfigDirective)stmt;
-                return d.Name == name;
-            }
-            return false;
-        }).FirstOrDefault();
-        return (ConfigDirective?)stmt;
+        return Statements.OfType<ConfigDirective>().Where(stmt => stmt.Name == name).FirstOrDefault();
     }
 
     public IEnumerable<T>? FindDirectives<T>()
     {
-        return (IEnumerable<T>?)Statements.Where(stmt => stmt is T);
+        return Statements.OfType<T>();
     }
     
     public string ToString(bool debug = false)
