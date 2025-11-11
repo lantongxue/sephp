@@ -29,7 +29,10 @@ namespace sephp.Nginx.ViewModels
         private NginxPackage _package;
 
         [Reactive]
-        private TextDocument _errorLogDocument;
+        private TextDocument _errorLogDocument = new();
+
+        [Reactive]
+        private TextDocument _configDocument = new();
 
         public NginxViewModel(IScreen screen)
         {
@@ -54,13 +57,21 @@ namespace sephp.Nginx.ViewModels
                     _config.Settings.Pid = pid;
                     _config.Save();
                 });
-            Package.GetAccessLog("localhost");
-            using (var reader = File.OpenText(Package.GetErrorLog()))
+            string errorLog = Package.GetErrorLog();
+            if(File.Exists(errorLog))
             {
-                ITextSource source = new StringTextSource(reader.ReadToEnd());
-                ErrorLogDocument = new TextDocument(source);
+                using (var reader = File.OpenText(errorLog))
+                {
+                    ITextSource source = new StringTextSource(reader.ReadToEnd());
+                    ErrorLogDocument = new TextDocument(source);
+                }
             }
 
+            using (var reader = File.OpenText(Package.GetConfigFile()))
+            {
+                ITextSource source = new StringTextSource(reader.ReadToEnd());
+                ConfigDocument = new TextDocument(source);
+            }
         }
 
         [ReactiveCommand]

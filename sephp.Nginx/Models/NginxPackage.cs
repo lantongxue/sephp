@@ -24,11 +24,16 @@ namespace sephp.Nginx.Models
             await p.Start();
         }
 
+        public string GetConfigFile()
+        {
+            return Path.Combine(PackageDirectory, "conf", "nginx.conf");
+        }
+
         public ConfigRoot? GetConfig(bool force = false)
         {
             if (_configRoot == null || force)
             {
-                _configRoot = ConfigParser.Parse(Path.Combine(PackageDirectory, "conf", "nginx.conf"));
+                _configRoot = ConfigParser.Parse(GetConfigFile());
             }
             return _configRoot;
         }
