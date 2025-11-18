@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AvaloniaEdit.Document;
+using Avalonia.Threading;
 
 namespace sephp.Nginx.ViewModels
 {
@@ -57,21 +58,25 @@ namespace sephp.Nginx.ViewModels
                     _config.Settings.Pid = pid;
                     _config.Save();
                 });
-            string errorLog = Package.GetErrorLog();
-            if(File.Exists(errorLog))
+
+            Dispatcher.UIThread.Post(() =>
             {
-                using (var reader = File.OpenText(errorLog))
+                string errorLog = Package.GetErrorLog();
+                if (File.Exists(errorLog))
+                {
+                    using (var reader = File.OpenText(errorLog))
+                    {
+                        ITextSource source = new StringTextSource(reader.ReadToEnd());
+                        ErrorLogDocument = new TextDocument(source);
+                    }
+                }
+
+                using (var reader = File.OpenText(Package.GetConfigFile()))
                 {
                     ITextSource source = new StringTextSource(reader.ReadToEnd());
-                    ErrorLogDocument = new TextDocument(source);
+                    ConfigDocument = new TextDocument(source);
                 }
-            }
-
-            using (var reader = File.OpenText(Package.GetConfigFile()))
-            {
-                ITextSource source = new StringTextSource(reader.ReadToEnd());
-                ConfigDocument = new TextDocument(source);
-            }
+            });
         }
 
         [ReactiveCommand]
@@ -96,6 +101,21 @@ namespace sephp.Nginx.ViewModels
         private async Task Reload()
         {
             await Package.Reload();
+        }
+
+        [ReactiveCommand]
+        private void SaveConfig()
+        {
+            using (StreamWriter textWriter = new StreamWriter(Package.GetConfigFile()))
+            {
+                ConfigDocument.WriteTextTo(textWriter);
+            }
+        }
+
+        [ReactiveCommand]
+        private void ReloadConfig()
+        {
+            ConfigDocument.Text = File.ReadAllText(Package.GetConfigFile());
         }
     }
 }

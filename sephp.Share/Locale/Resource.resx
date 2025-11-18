@@ -189,4 +189,10 @@
   <data name="Website" xml:space="preserve">
     <value>Website</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Versions" xml:space="preserve">
+    <value>Versions</value>
+  </data>
 </root>

@@ -214,6 +214,15 @@ namespace sephp.Share.Locale {
         }
         
         /// <summary>
+        ///   查找类似 Save 的本地化字符串。
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Setting 的本地化字符串。
         /// </summary>
         public static string Setting {
@@ -264,6 +273,15 @@ namespace sephp.Share.Locale {
         public static string Theme {
             get {
                 return ResourceManager.GetString("Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Versions 的本地化字符串。
+        /// </summary>
+        public static string Versions {
+            get {
+                return ResourceManager.GetString("Versions", resourceCulture);
             }
         }
         

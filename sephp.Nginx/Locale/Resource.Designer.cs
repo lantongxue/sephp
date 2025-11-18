@@ -68,5 +68,32 @@ namespace sephp.Nginx.Locale {
                 return ResourceManager.GetString("Nginx", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 Reload Config Success! 的本地化字符串。
+        /// </summary>
+        public static string ReloadConfigSuccess {
+            get {
+                return ResourceManager.GetString("ReloadConfigSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Save Success! 的本地化字符串。
+        /// </summary>
+        public static string SaveConfigSuccess {
+            get {
+                return ResourceManager.GetString("SaveConfigSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Tips 的本地化字符串。
+        /// </summary>
+        public static string Tips {
+            get {
+                return ResourceManager.GetString("Tips", resourceCulture);
+            }
+        }
     }
 }

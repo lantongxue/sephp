@@ -67,7 +67,7 @@
 		<TabControl
 			Grid.Row="1"
 			Theme="{StaticResource CardTabControl}">
-			<TabItem Padding="10" Header="基本配置">
+			<TabItem Padding="10" Header="nginx.conf">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="50" />
@@ -76,22 +76,26 @@
 					<Border Grid.Row="0" Theme="{StaticResource CardBorder}">
 						<StackPanel Orientation="Horizontal" Spacing="10">
 							<Button 
-								Classes="Success" 
-								Content="保存" 
-								Command="{Binding StartCommand}" />
+								Classes="Primary" 
+								Content="{x:Static lang:Resource.Save}"
+								Click="SaveConfButton_Click"
+								Command="{Binding SaveConfigCommand}" />
 							<Button 
-								Classes="Success" 
-								Content="重载" 
-								Command="{Binding StartCommand}" />
+								Classes="Secondary" 
+								Content="{x:Static lang:Resource.Reload}" 
+								Click="ReloadConfButton_Click"
+								Command="{Binding ReloadConfigCommand}" />
 						</StackPanel>
 					</Border>
-					<AvaloniaEdit:TextEditor x:Name="ConfigEditor" Grid.Row="1"
+					<Border Grid.Row="1" Theme="{StaticResource CardBorder}">
+						<AvaloniaEdit:TextEditor x:Name="ConfigEditor"
 							Document="{Binding ConfigDocument}"
 							ShowLineNumbers="True"
 							FontFamily="Cascadia Code,Consolas,Menlo,Monospace" />
+					</Border>
 				</Grid>
 			</TabItem>
-			<TabItem Padding="10" Header="版本管理">
+			<TabItem Padding="10" Header="{x:Static lang:Resource.Versions}">
 				
 			</TabItem>
 			<TabItem Padding="10" Header="ErrorLog">

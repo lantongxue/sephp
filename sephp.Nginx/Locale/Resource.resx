@@ -120,4 +120,13 @@
   <data name="Nginx" xml:space="preserve">
     <value>Nginx</value>
   </data>
+  <data name="ReloadConfigSuccess" xml:space="preserve">
+    <value>Reload Config Success!</value>
+  </data>
+  <data name="SaveConfigSuccess" xml:space="preserve">
+    <value>Save Success!</value>
+  </data>
+  <data name="Tips" xml:space="preserve">
+    <value>Tips</value>
+  </data>
 </root>

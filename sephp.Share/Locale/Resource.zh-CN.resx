@@ -160,7 +160,7 @@
     <value>Redis</value>
   </data>
   <data name="Reload" xml:space="preserve">
-    <value>重载配置</value>
+    <value>重载</value>
   </data>
   <data name="RepoName" xml:space="preserve">
     <value>GitHub</value>
@@ -188,5 +188,11 @@
   </data>
   <data name="Website" xml:space="preserve">
     <value>网站管理</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Versions" xml:space="preserve">
+    <value>版本管理</value>
   </data>
 </root>
